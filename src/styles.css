@@ -681,7 +681,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(4rem, 8vw, 7rem) clamp(4rem, 8vw, 9rem);
+  padding: clamp(4rem, 8vw, 7rem) clamp(2.5rem, 5vw, 6rem);
   color: var(--azul-escuro);
   background-color: var(--azul-claro);
   overflow: hidden;
@@ -725,7 +725,7 @@ button:focus-visible {
 }
 
 .testimonial-quote {
-  max-width: 62ch;
+  max-width: 72ch;
   margin: 0 auto;
   color: var(--azul-escuro);
   font-family: var(--font-body);
@@ -736,14 +736,14 @@ button:focus-visible {
   hyphens: none;
   overflow-wrap: normal;
   word-break: normal;
-  text-align: justify;
+  text-align: center;
   text-align-last: center;
-  text-justify: inter-word;
   text-wrap: pretty;
 }
 
 .testimonial-sentence {
   display: block;
+  text-wrap: balance;
 }
 
 .testimonial-stars {
