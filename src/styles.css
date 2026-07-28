@@ -681,7 +681,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(4rem, 8vw, 7rem) clamp(7rem, 15vw, 16rem);
+  padding: clamp(4rem, 8vw, 7rem) clamp(4rem, 8vw, 9rem);
   color: var(--azul-escuro);
   background-color: var(--azul-claro);
   overflow: hidden;
@@ -707,7 +707,7 @@ button:focus-visible {
 }
 
 .testimonial-viewport {
-  width: min(100%, 820px);
+  width: min(100%, 1080px);
   min-height: 210px;
   display: grid;
   overflow: hidden;
@@ -725,7 +725,7 @@ button:focus-visible {
 }
 
 .testimonial-quote {
-  max-width: 46ch;
+  max-width: 62ch;
   margin: 0 auto;
   color: var(--azul-escuro);
   font-family: var(--font-body);
