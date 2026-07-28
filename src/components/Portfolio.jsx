@@ -32,10 +32,10 @@ const photos = [
     position: "center 46%",
   },
   {
-    src: "/assets/images/ensaio-6.jpg",
-    alt: "Cachorro pequeno branco e marrom em meio à natureza",
+    src: "/assets/images/ensaio-familia-com-dog.png",
+    alt: "Família reunida com seu cachorro durante ensaio ao ar livre",
     layout: "wide",
-    position: "center 46%",
+    position: "center center",
   },
 ];
 
