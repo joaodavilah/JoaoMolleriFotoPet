@@ -742,6 +742,10 @@ button:focus-visible {
   text-wrap: pretty;
 }
 
+.testimonial-sentence {
+  display: block;
+}
+
 .testimonial-stars {
   margin-top: 0.7rem;
   color: #E0C700;

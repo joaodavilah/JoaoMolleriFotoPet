@@ -21,6 +21,10 @@ const testimonials = [
 
 const ease = [0.22, 1, 0.36, 1];
 
+function splitIntoSentences(quote) {
+  return quote.match(/[^.!]+[.!]+|[^.!]+$/g) ?? [quote];
+}
+
 export default function Testimonials() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -129,7 +133,15 @@ export default function Testimonials() {
                 aria-label={`Avaliação ${index + 1} de ${testimonials.length}`}
               >
                 <blockquote className="testimonial-quote">
-                  “{testimonials[index].quote}”
+                  {splitIntoSentences(testimonials[index].quote).map(
+                    (sentence, sentenceIndex, sentences) => (
+                      <span className="testimonial-sentence" key={sentenceIndex}>
+                        {sentenceIndex === 0 ? "“" : ""}
+                        {sentence.trim()}
+                        {sentenceIndex === sentences.length - 1 ? "”" : ""}
+                      </span>
+                    ),
+                  )}
                 </blockquote>
 
                 <motion.div
