@@ -96,11 +96,11 @@ export default function Portfolio() {
           transition={{ duration: 0.78, ease }}
         >
           <p className="section-eyebrow">Portfólio</p>
-          <h2 className="section-title">Ensaios que celebram cada personalidade</h2>
+          <h2 className="section-title">É aqui que o amor é registrado.</h2>
           <p className="section-description">
-            Cada pet tem seu próprio jeito de olhar, de se mover e de demonstrar afeto.
-            Os ensaios são conduzidos com calma para captar esses detalhes sem pressa,
-            respeitando o ritmo de cada animal e de sua família.
+            Alguns momentos merecem durar para sempre. 
+            Registre a personalidade, o carinho e os pequenos detalhes que fazem seu pet ser único 
+            e transforme essa conexão em lembranças para toda a vida.
           </p>
         </motion.header>
 

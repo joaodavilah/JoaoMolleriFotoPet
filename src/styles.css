@@ -1,14 +1,4 @@
-/* ==========================================================================
-   João Molleri Fotopet — Folha de estilos
-   React + Vite + Framer Motion
-   ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   1. FONTES (@font-face)
-   Aponta para arquivos locais em assets/fonts. Caso os arquivos ainda não
-   tenham sido adicionados, o navegador utiliza automaticamente as fontes
-   alternativas definidas nas variáveis --font-display / --font-body.
-   -------------------------------------------------------------------------- */
 @font-face {
   font-family: "Cooper BT";
   src: url("/assets/fonts/CooperBT-Regular.woff2") format("woff2");
@@ -33,9 +23,7 @@
   font-display: swap;
 }
 
-/* --------------------------------------------------------------------------
-   2. VARIÁVEIS GLOBAIS
-   -------------------------------------------------------------------------- */
+
 :root {
   /* Paleta obrigatória */
   --azul-escuro: #023859;
@@ -45,7 +33,7 @@
   --preto: #1C1A17;
   --branco: #FFFFFF;
 
-  /* Variações de apoio derivadas da paleta (mesmas cores, opacidades distintas) */
+
   --azul-escuro-90: rgba(2, 56, 89, 0.92);
   --preto-70: rgba(28, 26, 23, 0.72);
   --overlay-hero:
@@ -63,11 +51,10 @@
       rgba(28, 26, 23, 0.48) 100%
     );
 
-  /* Tipografia — Cooper BT para destaque, DM Sans para o restante */
+
   --font-display: "Cooper BT", Georgia, serif;
   --font-body: "DM Sans", Arial, sans-serif;
 
-  /* Espaçamento e ritmo vertical */
   --espaco-xs: 0.5rem;
   --espaco-sm: 1rem;
   --espaco-md: 2rem;
@@ -83,9 +70,7 @@
   --transicao-padrao: 0.35s ease;
 }
 
-/* --------------------------------------------------------------------------
-   3. RESET E BASE
-   -------------------------------------------------------------------------- */
+
 *,
 *::before,
 *::after {
@@ -138,7 +123,7 @@ button {
   cursor: pointer;
 }
 
-/* Foco visível para navegação por teclado */
+
 a:focus-visible,
 button:focus-visible {
   outline: 3px solid var(--verde);
@@ -146,7 +131,7 @@ button:focus-visible {
   border-radius: 4px;
 }
 
-/* Respeita usuários que preferem menos animação */
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -167,9 +152,7 @@ button:focus-visible {
   padding: 0 var(--espaco-md);
 }
 
-/* --------------------------------------------------------------------------
-   4. BOTÕES
-   -------------------------------------------------------------------------- */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -225,9 +208,7 @@ button:focus-visible {
   font-size: 1rem;
 }
 
-/* --------------------------------------------------------------------------
-   5. HEADER
-   -------------------------------------------------------------------------- */
+
 .site-header {
   position: fixed;
   top: 0;
@@ -306,7 +287,7 @@ button:focus-visible {
   width: 100%;
 }
 
-/* Estado inicial: header sobre a hero, texto claro */
+
 .site-header:not(.is-scrolled) .brand,
 .site-header:not(.is-scrolled) .main-nav {
   text-shadow: 0 2px 12px rgba(28, 26, 23, 0.45);
@@ -317,7 +298,7 @@ button:focus-visible {
   background-color: transparent;
 }
 
-/* Estado ao rolar: fundo claro semitransparente, sombra e texto escuro */
+
 .site-header.is-scrolled {
   background-color: rgba(255, 255, 255, 0.92);
   color: var(--azul-escuro);
@@ -327,7 +308,7 @@ button:focus-visible {
   backdrop-filter: blur(6px);
 }
 
-/* Botão hambúrguer (somente mobile) */
+
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -349,9 +330,7 @@ button:focus-visible {
   transition: transform var(--transicao-padrao), opacity var(--transicao-padrao);
 }
 
-/* --------------------------------------------------------------------------
-   6. HERO
-   -------------------------------------------------------------------------- */
+
 .hero {
   position: relative;
   min-height: 100vh;
@@ -474,9 +453,7 @@ button:focus-visible {
   100% { transform: translateY(0); opacity: 0; }
 }
 
-/* --------------------------------------------------------------------------
-   7. SEÇÕES — CABEÇALHO PADRÃO
-   -------------------------------------------------------------------------- */
+
 .section-heading {
   max-width: 720px;
   margin-bottom: var(--espaco-lg);
@@ -508,9 +485,7 @@ button:focus-visible {
   color: var(--branco);
 }
 
-/* --------------------------------------------------------------------------
-   8. PORTFÓLIO / GALERIA
-   -------------------------------------------------------------------------- */
+
 .portfolio {
   padding: var(--espaco-xl) 0;
   background-color: var(--branco);
@@ -564,9 +539,7 @@ button:focus-visible {
   transform: scale(1.06);
 }
 
-/* --------------------------------------------------------------------------
-   9. SOBRE MIM
-   -------------------------------------------------------------------------- */
+
 .about {
   padding: var(--espaco-xl) 0;
   background-color: var(--branco);
@@ -649,9 +622,7 @@ button:focus-visible {
 }
 
 
-/* --------------------------------------------------------------------------
-   10. DEPOIMENTOS — CARROSSEL MANUAL
-   -------------------------------------------------------------------------- */
+
 .testimonials {
   padding: 0;
   background-color: var(--azul-claro);
@@ -788,9 +759,7 @@ button:focus-visible {
 }
 
 
-/* --------------------------------------------------------------------------
-   11. CONTATO
-   -------------------------------------------------------------------------- */
+
 .contact {
   position: relative;
   padding: var(--espaco-xl) 0;
@@ -980,9 +949,7 @@ button:focus-visible {
   background-color: var(--azul-claro);
 }
 
-/* --------------------------------------------------------------------------
-   12. RODAPÉ
-   -------------------------------------------------------------------------- */
+
 .site-footer {
   position: relative;
   color: var(--azul-claro);
@@ -1135,9 +1102,7 @@ button:focus-visible {
   font-size: 0.76rem;
 }
 
-/* --------------------------------------------------------------------------
-   13. RESPONSIVIDADE
-   -------------------------------------------------------------------------- */
+
 @media (max-width: 960px) {
 
   .about-grid {
@@ -1382,7 +1347,7 @@ button:focus-visible {
   }
 }
 
-/* Ajustes específicos das animações React/Framer Motion */
+
 .gallery-item {
   transform-origin: center bottom;
   will-change: transform, opacity, filter, clip-path;
@@ -1399,7 +1364,7 @@ button:focus-visible {
 }
 
 
-/* Otimizações para as animações de entrada durante a rolagem */
+
 .portfolio,
 .about,
 .testimonials,
@@ -1419,9 +1384,6 @@ button:focus-visible {
 }
 
 
-/* ==========================================================================
-   INTERAÇÕES FLUIDAS, CURSOR PERSONALIZADO E NAVEGAÇÃO
-   ========================================================================== */
 
 :root {
   --ease-suave: cubic-bezier(0.22, 1, 0.36, 1);
@@ -1596,7 +1558,7 @@ body.menu-is-open {
   transform: scale(0.92);
 }
 
-/* Botões com brilho discreto e movimento mais fluido. */
+
 .btn,
 .footer-whatsapp,
 .back-to-top {
@@ -1658,7 +1620,7 @@ body.menu-is-open {
   box-shadow: 0 16px 36px rgba(123, 166, 111, 0.3);
 }
 
-/* Galeria com profundidade, brilho e legenda mais orgânica. */
+
 .gallery-item {
   position: relative;
   isolation: isolate;
@@ -1695,7 +1657,7 @@ body.menu-is-open {
   transform: translateX(42%);
 }
 
-/* Cartões e ícones com respostas suaves ao mouse. */
+
 .contact-card {
   transition:
     transform 420ms var(--ease-suave),
@@ -1745,7 +1707,7 @@ body.menu-is-open {
   transform: rotate(9deg) scale(1.08);
 }
 
-/* Carrossel e links do rodapé. */
+
 .carousel-button {
   transition:
     color 320ms var(--ease-suave),
@@ -1896,10 +1858,6 @@ body.menu-is-open {
 }
 
 
-/* ==========================================================================
-   CONTATO COM CÓPIA RÁPIDA E FUNDO DECORATIVO
-   ========================================================================== */
-
 .contact-card--copy {
   width: 100%;
   appearance: none;
@@ -2011,7 +1969,7 @@ body.menu-is-open {
   background-color: var(--verde);
 }
 
-/* Detalhes visuais sutis e perceptíveis nas áreas claras. */
+
 .portfolio,
 .about,
 .contact {
@@ -2032,7 +1990,7 @@ body.menu-is-open {
   pointer-events: none;
 }
 
-/* Patinhas e círculos decorativos. */
+
 .portfolio::before,
 .about::before,
 .contact::before {
@@ -2056,7 +2014,7 @@ body.menu-is-open {
   opacity: 0.74;
 }
 
-/* Contorno de gato em posição fixa dentro de cada seção. */
+
 .portfolio::after,
 .about::after,
 .contact::after {
@@ -2167,7 +2125,7 @@ body.menu-is-open {
 }
 
 
-/* Imagem da seção Sobre mim acompanha a rolagem até o final da seção. */
+
 .about {
   overflow: visible;
 }
@@ -2217,7 +2175,7 @@ body.menu-is-open {
 }
 
 
-/* Rodapé integrado à paleta principal do site. */
+
 .site-footer {
   color: var(--azul-claro);
   background:
@@ -2294,7 +2252,7 @@ body.menu-is-open {
 }
 
 
-/* Tipografia da hero em DM Sans. */
+
 .hero-content,
 .hero-title,
 .hero-word,

@@ -4,18 +4,18 @@ import { useEffect, useState } from "react";
 const testimonials = [
   {
     quote:
-      "O João teve muita paciência e conseguiu registrar exatamente a personalidade da nossa gata. O resultado ficou natural e emocionante.",
-    author: "Mariana e Luna",
+      "Amamos o ensaio! Além das fotos serem uma lembrança maravilhosa, criou uma memória muito feliz pra gente naquele dia. Foi um momento muito especial! Pablo até ficou meio tristinho quando acabou.",
+    author: "Aline",
   },
   {
     quote:
-      "Foi uma experiência muito tranquila. Nosso cachorro ficou confortável durante todo o ensaio e as fotografias superaram nossas expectativas.",
-    author: "Lucas e Theo",
+      "Pegamos um diazão e as fotos ficaram lindas! Amei ter registrado esses momentos contigo, tua empatia com a Catarina foi sensacional, fora a rapidez na entrega das fotos! Já te recomendei pra um monte de mãe de pet",
+    author: "Amanda",
   },
   {
     quote:
-      "As imagens ficaram delicadas e cheias de vida. Agora temos uma lembrança especial de uma fase que não volta mais.",
-    author: "Camila e Nina",
+      "Mais do que fotos lindas, você eternizou uma fase muito especial das nossas vidas. Cada imagem transmite amor, cumplicidade e a personalidade da Maristela. Uma lembrança que vamos guardar para sempre.",
+    author: "Nanda",
   },
 ];
 
