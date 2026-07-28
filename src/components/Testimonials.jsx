@@ -22,7 +22,7 @@ const testimonials = [
 const ease = [0.22, 1, 0.36, 1];
 
 function splitIntoSentences(quote) {
-  return quote.match(/[^.!]+[.!]+|[^.!]+$/g) ?? [quote];
+  return quote.match(/[^.,!]+[.,!]+|[^.,!]+$/g) ?? [quote];
 }
 
 export default function Testimonials() {
