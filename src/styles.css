@@ -733,7 +733,9 @@ button:focus-visible {
   font-style: normal;
   font-weight: 400;
   line-height: 1.32;
-  hyphens: auto;
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
   text-align: justify;
   text-align-last: center;
   text-justify: inter-word;
