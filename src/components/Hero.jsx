@@ -5,6 +5,11 @@ const words = ["lembranças", "histórias", "afetos", "conexões", "momentos"];
 
 const heroImages = [
   {
+    src: "/assets/images/hero-casal-com-pet.png",
+    alt: "Casal sorrindo ao ar livre com seu cachorro no colo",
+    position: "center center",
+  },
+  {
     src: "/assets/images/hero-gato.jpg",
     alt: "Gato branco e tigrado deitado tranquilamente perto de uma janela iluminada",
     position: "center 30%",
