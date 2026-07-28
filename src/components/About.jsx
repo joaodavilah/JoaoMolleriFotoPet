@@ -42,7 +42,10 @@ export default function About() {
         >
           <motion.header className="about-heading" variants={textItem}>
             <p className="section-eyebrow">Sobre mim</p>
-            <h2 className="section-title">Mais do que um fotógrafo, sou um pai de pet.</h2>
+            <h2 className="section-title">
+              <span>Mais que um fotógrafo,</span>
+              <span>Sou um pai de pet.</span>
+            </h2>
           </motion.header>
 
           <div className="about-text">

@@ -123,10 +123,13 @@ h1, h2, h3, h4 {
   margin: 0;
   font-weight: 400;
   line-height: 1.15;
+  text-wrap: balance;
 }
 
 p {
   margin: 0;
+  orphans: 2;
+  widows: 2;
 }
 
 button {
@@ -428,6 +431,10 @@ button:focus-visible {
   margin-top: 0.2rem;
   margin-bottom: var(--espaco-md);
   color: rgba(255, 255, 255, 0.92);
+  hyphens: auto;
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
 }
 
 .hero-actions {
@@ -483,12 +490,17 @@ button:focus-visible {
   font-size: clamp(1.9rem, 3.4vw, 2.7rem);
   color: var(--azul-escuro);
   margin-bottom: var(--espaco-sm);
+  text-wrap: balance;
 }
 
 .section-description {
   font-size: 1.05rem;
   max-width: 60ch;
   color: #40403c;
+  hyphens: auto;
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
   text-wrap: pretty;
 }
 
@@ -574,9 +586,13 @@ button:focus-visible {
 }
 
 .about-heading .section-title {
-  max-width: 15ch;
+  max-width: 20ch;
   color: var(--azul-escuro);
   text-wrap: balance;
+}
+
+.about-heading .section-title span {
+  display: block;
 }
 
 .about-text {
@@ -588,6 +604,10 @@ button:focus-visible {
   color: var(--preto);
   font-size: 1.12rem;
   line-height: 1.72;
+  hyphens: auto;
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
   text-wrap: pretty;
 }
 
@@ -602,6 +622,11 @@ button:focus-visible {
   font-family: var(--font-display);
   font-size: 1.25rem;
   line-height: 1.5;
+  hyphens: auto;
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
+  text-wrap: pretty;
 }
 
 .about-photo {
@@ -700,7 +725,7 @@ button:focus-visible {
 }
 
 .testimonial-quote {
-  max-width: 34ch;
+  max-width: 46ch;
   margin: 0 auto;
   color: var(--azul-escuro);
   font-family: var(--font-body);
@@ -708,7 +733,11 @@ button:focus-visible {
   font-style: normal;
   font-weight: 400;
   line-height: 1.32;
-  text-wrap: balance;
+  hyphens: auto;
+  text-align: justify;
+  text-align-last: center;
+  text-justify: inter-word;
+  text-wrap: pretty;
 }
 
 .testimonial-stars {
@@ -1025,6 +1054,11 @@ button:focus-visible {
   color: rgba(197, 215, 217, 0.76);
   font-size: 0.94rem;
   line-height: 1.7;
+  hyphens: auto;
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
+  text-wrap: pretty;
 }
 
 
@@ -1070,6 +1104,11 @@ button:focus-visible {
   color: rgba(197, 215, 217, 0.72);
   font-size: 0.88rem;
   line-height: 1.65;
+  hyphens: auto;
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
+  text-wrap: pretty;
 }
 
 .footer-whatsapp,
