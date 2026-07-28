@@ -135,6 +135,12 @@ export default function Hero() {
           Registros espontâneos, delicados e cheios de personalidade para transformar
           momentos ao lado do seu pet em memórias permanentes.
         </p>
+
+        <div className="hero-actions">
+          <a href="#contato" className="btn btn-primary hero-contact-button">
+            Entre em contato
+          </a>
+        </div>
       </motion.div>
 
       <a href="#portfolio" className="scroll-hint" aria-label="Rolar para o portfólio">
