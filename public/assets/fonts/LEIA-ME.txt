@@ -1,7 +1,0 @@
-Para usar exatamente as fontes licenciadas, coloque nesta pasta:
-
-- CooperBT-Regular.woff2
-- DMSans-Regular.woff2
-- DMSans-SemiBold.woff2
-
-O site funciona sem esses arquivos usando as fontes alternativas definidas no CSS.

@@ -1,122 +1,142 @@
-import { motion } from "framer-motion";
+import SplitText from './SplitText';
+
+const footerSplit = {
+  tag: 'span',
+  splitType: 'words',
+  delay: 18,
+  duration: 0.5,
+  threshold: 0.08,
+  rootMargin: '-20px',
+  from: { opacity: 0, y: 12 },
+  to: { opacity: 1, y: 0 }
+};
 
 const navigation = [
-  ["Início", "#inicio"],
-  ["Portfólio", "#portfolio"],
-  ["Sobre mim", "#sobre"],
-  ["Depoimentos", "#depoimentos"],
-  ["Contato", "#contato"],
+  ['Início', '#topo'],
+  ['Sobre', '#sobre'],
+  ['Serviços', '#servicos'],
+  ['Contato', '#contato']
 ];
 
-const ease = [0.22, 1, 0.36, 1];
-
-const footerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const footerItem = {
-  hidden: {
-    opacity: 0,
-    y: 34,
-    filter: "blur(6px)",
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.68,
-      ease,
-    },
-  },
-};
-
 export default function Footer() {
+  const scrollToTop = event => {
+    event.preventDefault();
+    window.history.replaceState(
+      null,
+      '',
+      `${window.location.pathname}${window.location.search}`
+    );
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: reducedMotion ? 'auto' : 'smooth'
+    });
+  };
+
   return (
     <footer className="site-footer">
-      <div className="footer-accent" aria-hidden="true" />
+      <div className="container">
+        <div className="footer-panel">
+          <div className="footer-inner">
+            <div className="footer-brand">
+              <a
+                href="#topo"
+                className="footer-logo"
+                aria-label="DAVILA — voltar ao início"
+                onClick={scrollToTop}
+              >
+                <img
+                  src="/assets/images/Vector.png"
+                  alt=""
+                  width="642"
+                  height="662"
+                  className="footer-logo-vector"
+                />
+              </a>
+              <SplitText
+                text="Soluções digitais, desenvolvimento e dados para empresas que querem evoluir."
+                tag="p"
+                className="footer-tagline"
+                reveal="editorial"
+                splitType="words"
+                delay={16}
+                duration={0.5}
+                threshold={0.08}
+                rootMargin="-20px"
+                textAlign="left"
+                from={{ opacity: 0, y: 12 }}
+                to={{ opacity: 1, y: 0 }}
+              />
+            </div>
 
-      <motion.div
-        className="section-inner footer-inner"
-        variants={footerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.18, margin: "0px 0px -40px 0px" }}
-      >
-        <motion.div className="footer-brand" variants={footerItem}>
-          <span className="footer-kicker">Fotografia pet</span>
+            <nav className="footer-nav" aria-label="Links rápidos">
+              <span className="footer-column-title">Navegação</span>
+              {navigation.map(([label, href]) => (
+                <a
+                  key={label}
+                  href={href}
+                  className="footer-link"
+                  onClick={href === '#topo' ? scrollToTop : undefined}
+                >
+                  <SplitText
+                    text={label}
+                    className="footer-link-split"
+                    textAlign="left"
+                    {...footerSplit}
+                  />
+                </a>
+              ))}
+            </nav>
 
-          <span className="footer-name">
-            João Molleri <em>Fotopet</em>
-          </span>
+            <div className="footer-meta">
+              <span className="footer-column-title">Contato</span>
+              <a href="mailto:guidavilah@outlook.com" className="footer-link">
+                <SplitText
+                  text="guidavilah@outlook.com"
+                  className="footer-link-split"
+                  textAlign="left"
+                  {...footerSplit}
+                />
+              </a>
+              <a href="tel:+5547999559197" className="footer-link">
+                <SplitText
+                  text="(47) 99955-9197"
+                  className="footer-link-split"
+                  textAlign="left"
+                  {...footerSplit}
+                />
+              </a>
+            </div>
+          </div>
 
-          <p className="footer-description">
-            Fotografia autoral e afetiva para preservar a conexão entre cada pet e sua família.
-          </p>
-        </motion.div>
-
-        <motion.div className="footer-column" variants={footerItem}>
-          <h3>Contato</h3>
-
-          <div className="footer-links footer-contact">
-            <a href="tel:+5547992462186">☎ 47 99246-2186</a>
-            <a href="mailto:joaomollerifotopet@gmail.com">✉ joaomollerifotopet@gmail.com</a>
+          <div className="footer-bottom">
+            <SplitText
+              text="© 2026 Davila. Todos os direitos reservados."
+              tag="p"
+              className="footer-copyright"
+              reveal="editorial"
+              splitType="words"
+              delay={12}
+              duration={0.45}
+              threshold={0.05}
+              rootMargin="-10px"
+              textAlign="left"
+              from={{ opacity: 0, y: 10 }}
+              to={{ opacity: 1, y: 0 }}
+            />
             <a
-              href="https://www.instagram.com/joaomolleri_fotopet?igsh=MXI1NDdsbmg3cTRjbw=="
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#topo"
+              className="footer-back-to-top"
+              onClick={scrollToTop}
             >
-              ◎ @joaomolleri_fotopet
+              Voltar ao topo <span aria-hidden="true">↑</span>
             </a>
           </div>
-        </motion.div>
-
-        <motion.div className="footer-column" variants={footerItem}>
-          <h3>Navegação</h3>
-
-          <nav className="footer-links footer-nav" aria-label="Links do rodapé">
-            {navigation.map(([label, href]) => (
-              <a href={href} key={href}>{label}</a>
-            ))}
-          </nav>
-        </motion.div>
-
-        <motion.div className="footer-column footer-action" variants={footerItem}>
-          <h3>Comece por aqui</h3>
-
-          <p>Entre em contato para conversar sobre o ensaio e a história do seu pet.</p>
-
-          <a
-            href="https://wa.me/5547992462186"
-            className="footer-whatsapp"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Chamar no WhatsApp <span aria-hidden="true">↗</span>
-          </a>
-
-          <a href="#inicio" className="back-to-top">
-            Voltar ao topo <span aria-hidden="true">↑</span>
-          </a>
-        </motion.div>
-      </motion.div>
-
-      <motion.div
-        className="section-inner footer-bottom"
-        initial={{ opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.8 }}
-        transition={{ duration: 0.55, delay: 0.28, ease }}
-      >
-        <p>© {new Date().getFullYear()} João Molleri Fotopet. Todos os direitos reservados.</p>
-        <p>Fotografia feita com respeito ao tempo e à personalidade de cada pet.</p>
-      </motion.div>
+        </div>
+      </div>
     </footer>
   );
 }

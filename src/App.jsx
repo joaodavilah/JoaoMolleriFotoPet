@@ -1,20 +1,30 @@
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import Portfolio from "./components/Portfolio";
-import About from "./components/About";
-import Testimonials from "./components/Testimonials";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+import Header from './components/Header';
+import Hero from './components/Hero';
+import About from './components/About';
+import TransformStatement from './components/TransformStatement';
+import Services from './components/Services';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import CursorFollower from './components/CursorFollower';
+import SectionNavigator from './components/SectionNavigator';
+import useNavigationMotions from './hooks/useNavigationMotions';
 
 export default function App() {
+  useNavigationMotions();
+
   return (
     <>
+      <a className="skip-link" href="#conteudo-principal">
+        Pular para o conteúdo
+      </a>
+      <CursorFollower />
+      <SectionNavigator />
       <Header />
-      <main>
+      <main id="conteudo-principal">
         <Hero />
-        <Portfolio />
         <About />
-        <Testimonials />
+        <Services />
+        <TransformStatement />
         <Contact />
       </main>
       <Footer />

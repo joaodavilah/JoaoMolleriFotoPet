@@ -1,156 +1,143 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from 'motion/react';
+import SoftAurora from './SoftAurora';
+import SpecularButton from './SpecularButton';
 
-const words = ["lembranças", "histórias", "afetos", "conexões", "momentos"];
-
-const heroImages = [
-  {
-    src: "/assets/images/hero-casal-com-pet.png",
-    alt: "Casal sorrindo ao ar livre com seu cachorro no colo",
-    position: "center center",
-  },
-  {
-    src: "/assets/images/hero-gato.jpg",
-    alt: "Gato branco e tigrado deitado tranquilamente perto de uma janela iluminada",
-    position: "center 30%",
-  },
-  {
-    src: "/assets/images/hero-gato-alternativa.jpg",
-    alt: "Gato claro limpando a pata durante um momento espontâneo do ensaio",
-    position: "center 44%",
-  },
+const heroTitleLines = [
+  ['Tecnologia', 'para', 'levar', 'negócios'],
+  ['mais', 'longe.']
 ];
 
-const wordTransition = {
-  duration: 0.62,
-  ease: [0.22, 1, 0.36, 1],
-};
-
-const imageTransition = {
-  duration: 1.5,
-  ease: [0.22, 1, 0.36, 1],
-};
-
 export default function Hero() {
-  const [wordIndex, setWordIndex] = useState(0);
-  const [imageIndex, setImageIndex] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
+  const revealProps = delay => ({
+    initial: {
+      opacity: 0,
+      y: shouldReduceMotion ? 8 : 22,
+      filter: `blur(${shouldReduceMotion ? 1 : 4}px)`
+    },
+    whileInView: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)'
+    },
+    viewport: { once: false, amount: 0.4 },
+    transition: {
+      duration: shouldReduceMotion ? 0.26 : 0.62,
+      delay: shouldReduceMotion ? Math.min(delay, 0.08) : delay,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  });
 
-  useEffect(() => {
-    const wordInterval = window.setInterval(() => {
-      setWordIndex((current) => (current + 1) % words.length);
-    }, 3000);
+  const blurWordProps = delay => ({
+    initial: {
+      opacity: 0,
+      y: shouldReduceMotion ? -8 : -50,
+      filter: `blur(${shouldReduceMotion ? 1 : 10}px)`
+    },
+    whileInView: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)'
+    },
+    viewport: { once: true, amount: 0.4 },
+    transition: {
+      duration: shouldReduceMotion ? 0.26 : 0.7,
+      delay: shouldReduceMotion ? Math.min(delay, 0.08) : delay,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  });
 
-    return () => window.clearInterval(wordInterval);
-  }, []);
-
-  useEffect(() => {
-    const imageInterval = window.setInterval(() => {
-      setImageIndex((current) => (current + 1) % heroImages.length);
-    }, 10000);
-
-    return () => window.clearInterval(imageInterval);
-  }, []);
-
-  const currentImage = heroImages[imageIndex];
+  const scrollToServices = () => {
+    document.getElementById('servicos')?.scrollIntoView({
+      behavior: shouldReduceMotion ? 'auto' : 'smooth'
+    });
+  };
 
   return (
-    <section className="hero" id="inicio">
-      <AnimatePresence initial={false}>
-        <motion.div
-          className="hero-media"
-          key={currentImage.src}
-          role="img"
-          aria-label={currentImage.alt}
-          style={{
-            backgroundImage: `url("${currentImage.src}")`,
-            backgroundPosition: currentImage.position,
-          }}
-          initial={{
-            opacity: 0,
-            scale: 1.045,
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-          }}
-          exit={{
-            opacity: 0,
-            scale: 1.02,
-          }}
-          transition={imageTransition}
+    <section className="hero" id="hero" data-section="hero">
+      <div className="hero-background" aria-hidden="true">
+        <SoftAurora
+          speed={0.6}
+          scale={1.5}
+          brightness={1.0}
+          color1="#196a67"
+          color2="#030930"
+          noiseFrequency={2.5}
+          noiseAmplitude={1.0}
+          bandHeight={0.5}
+          bandSpread={1.0}
+          octaveDecay={0.1}
+          layerOffset={0}
+          colorSpeed={1.0}
+          enableMouseInteraction
+          mouseInfluence={0.25}
         />
-      </AnimatePresence>
+      </div>
 
       <div className="hero-overlay" aria-hidden="true" />
 
-      <motion.div
-        className="hero-content"
-        initial={{ opacity: 0, x: -48 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.9, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <h1 className="hero-title">
-          Fotos que guardam
+      <div className="hero-inner">
+        <div className="hero-content">
+          <h1 className="hero-title hero-blur-title">
+            {heroTitleLines.map((line, lineIndex) => (
+              <span className="hero-title-line" key={line.join('-')}>
+                {line.map((word, wordIndex) => {
+                  const previousWords = lineIndex === 0 ? 0 : heroTitleLines[0].length;
+                  const animationIndex = previousWords + wordIndex;
 
-          <span className="hero-word-wrap" aria-live="polite">
-            <AnimatePresence initial={false} mode="popLayout">
-              <motion.span
-                className="hero-word"
-                key={words[wordIndex]}
-                initial={{
-                  opacity: 0,
-                  y: 52,
-                  scale: 0.94,
-                  filter: "blur(10px)",
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                  filter: "blur(0px)",
-                }}
-                exit={{
-                  opacity: 0,
-                  y: -46,
-                  scale: 0.96,
-                  filter: "blur(8px)",
-                }}
-                transition={wordTransition}
-              >
-                {words[wordIndex]}
+                  return (
+                    <motion.span
+                      className="hero-title-word"
+                      key={word}
+                      {...blurWordProps(0.12 + animationIndex * 0.14)}
+                    >
+                      {word}
+                    </motion.span>
+                  );
+                })}
+              </span>
+            ))}
+          </h1>
 
-                <motion.span
-                  className="hero-word-underline"
-                  aria-hidden="true"
-                  initial={{ scaleX: 0, opacity: 0 }}
-                  animate={{ scaleX: 1, opacity: 0.6 }}
-                  exit={{ scaleX: 0, opacity: 0 }}
-                  transition={{
-                    duration: 0.45,
-                    delay: 0.12,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                />
-              </motion.span>
-            </AnimatePresence>
-          </span>
-        </h1>
+          <motion.p
+            className="hero-subtitle reveal-text"
+            data-animate="fade-up"
+            {...revealProps(0.7)}
+          >
+            Desenvolvemos websites, sistemas, aplicativos e soluções em dados.
+            Unindo estratégia, design e engenharia para empresas que querem evoluir.
+          </motion.p>
 
-        <p className="hero-description">
-          Registros espontâneos, delicados e cheios de personalidade para transformar
-          momentos ao lado do seu pet em memórias permanentes.
-        </p>
-
-        <div className="hero-actions">
-          <a href="#contato" className="btn btn-primary hero-contact-button">
-            Entre em contato
-          </a>
+          <motion.div
+            className="hero-actions reveal-text"
+            data-animate="fade-up"
+            {...revealProps(0.92)}
+          >
+            <SpecularButton
+              size="lg"
+              radius={18}
+              tint="#ffffff"
+              tintOpacity={0}
+              blur={0}
+              textColor="#f5f5f5"
+              lineColor="#98a1da"
+              baseColor="#525252"
+              intensity={1}
+              shineSize={10}
+              shineFade={40}
+              thickness={1}
+              speed={0.35}
+              followMouse
+              proximity={250}
+              autoAnimate={false}
+              onClick={scrollToServices}
+              className="hero-specular-button"
+            >
+              Ver soluções
+            </SpecularButton>
+          </motion.div>
         </div>
-      </motion.div>
-
-      <a href="#portfolio" className="scroll-hint" aria-label="Rolar para o portfólio">
-        <span />
-      </a>
+      </div>
     </section>
   );
 }

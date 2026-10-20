@@ -1,350 +1,146 @@
-import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
+import SplitText from './SplitText';
 
-function PhoneIcon() {
-  return (
-    <svg viewBox="0 0 24 24" focusable="false">
-      <path d="M6.6 10.8a15.7 15.7 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24c1.1.36 2.28.54 3.5.54a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.57 21 3 13.43 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.22.18 2.4.54 3.5a1 1 0 0 1-.25 1L6.6 10.8Z" />
-    </svg>
-  );
-}
+const phoneDisplay = '(47) 99955-9197';
+const phoneHref = '+5547999559197';
+const email = 'guidavilah@outlook.com';
+const whatsappUrl = 'https://wa.me/5547999559197';
 
-function InstagramIcon() {
-  return (
-    <svg viewBox="0 0 24 24" focusable="false">
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="1" />
-    </svg>
-  );
-}
+const IconPhone = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M6.6 2.8 9.1 7a1.7 1.7 0 0 1-.2 1.9l-1.4 1.6a15.2 15.2 0 0 0 6 6l1.6-1.4a1.7 1.7 0 0 1 1.9-.2l4.2 2.5a1.7 1.7 0 0 1 .8 1.8l-.4 2a2.4 2.4 0 0 1-2.4 1.9C9.2 23.1.9 14.8.9 4.8a2.4 2.4 0 0 1 1.9-2.4l2-.4a1.7 1.7 0 0 1 1.8.8Z" />
+  </svg>
+);
 
-function MailIcon() {
-  return (
-    <svg viewBox="0 0 24 24" focusable="false">
-      <rect x="3" y="5" width="18" height="14" rx="2" />
-      <path d="m4 7 8 6 8-6" />
-    </svg>
-  );
-}
+const IconMail = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M3 5.5h18a1.5 1.5 0 0 1 1.5 1.5v10A1.5 1.5 0 0 1 21 18.5H3A1.5 1.5 0 0 1 1.5 17V7A1.5 1.5 0 0 1 3 5.5Zm0 1.8 9 6.1 9-6.1" />
+  </svg>
+);
 
-function CopyIcon() {
-  return (
-    <svg viewBox="0 0 24 24" focusable="false">
-      <rect x="8" y="8" width="11" height="11" rx="2" />
-      <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
-    </svg>
-  );
-}
+const IconCopy = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <rect x="8" y="8" width="10" height="10" rx="2" />
+    <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
+  </svg>
+);
 
-function ExternalIcon() {
-  return (
-    <svg viewBox="0 0 24 24" focusable="false">
-      <path d="M7 17 17 7" />
-      <path d="M9 7h8v8" />
-    </svg>
-  );
-}
-
-function WhatsAppIcon() {
-  return (
-    <svg viewBox="0 0 32 32" focusable="false">
-      <path d="M26.8 15.3A10.8 10.8 0 0 1 10.9 25l-6.2 1.8 1.9-6A10.8 10.8 0 1 1 26.8 15.3Z" />
-      <path d="M11 10c.25-.6.53-.61.94-.62h.7c.22 0 .56.08.7.52l.95 2.28c.1.25.05.5-.1.72l-.7.9c-.18.22-.14.43-.02.66.82 1.4 2 2.55 3.4 3.34.24.14.47.12.66-.1l.91-1.1c.2-.25.47-.3.74-.2l2.18 1.02c.28.13.47.22.53.36.07.13.07.78-.18 1.51-.25.73-1.48 1.4-2.05 1.48-.53.08-1.2.1-1.96-.13-.46-.15-1.04-.35-1.79-.67-3.12-1.36-5.16-4.5-5.31-4.72-.15-.22-1.26-1.68-1.26-3.2 0-1.52.8-2.28 1.07-2.6Z" />
-    </svg>
-  );
-}
-
-const ease = [0.22, 1, 0.36, 1];
-
-const contactListVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.12,
-    },
-  },
-};
-
-const contactCardVariants = {
-  hidden: {
-    opacity: 0,
-    x: -42,
-    y: 18,
-    scale: 0.97,
-    filter: "blur(7px)",
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    scale: 1,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.68,
-      ease,
-    },
-  },
-};
-
-async function copyToClipboard(value) {
-  // Primeira tentativa: API moderna do navegador.
-  try {
-    if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(value);
-      return true;
-    }
-  } catch {
-    // Continua para o fallback abaixo.
-  }
-
-  // Fallback para navegadores, redes locais e contextos sem HTTPS.
-  const textArea = document.createElement("textarea");
-  textArea.value = value;
-  textArea.setAttribute("readonly", "");
-  textArea.setAttribute("aria-hidden", "true");
-  textArea.style.position = "fixed";
-  textArea.style.top = "0";
-  textArea.style.left = "-9999px";
-  textArea.style.width = "1px";
-  textArea.style.height = "1px";
-  textArea.style.opacity = "0";
-
-  document.body.appendChild(textArea);
-
-  try {
-    textArea.focus({ preventScroll: true });
-    textArea.select();
-    textArea.setSelectionRange(0, textArea.value.length);
-
-    const copied = document.execCommand("copy");
-    return copied;
-  } catch {
-    return false;
-  } finally {
-    document.body.removeChild(textArea);
-  }
-}
+const IconWhatsapp = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M20.6 3.4A11.8 11.8 0 0 0 2.1 17.6L.5 23.5l6-1.6A11.8 11.8 0 0 0 20.6 3.4Z" />
+    <path d="M8.1 6.8c.3-.7.6-.7 1-.7h.8c.2 0 .5.1.6.5l1.1 2.7c.1.4.1.6-.1.9l-.8 1c-.2.2-.3.4-.1.7.8 1.5 1.9 2.7 3.4 3.5.3.2.5.2.7-.1l1-1.2c.2-.3.5-.3.8-.2l2.6 1.2c.4.2.6.3.6.6 0 .3-.2 1.7-1.1 2.4-.9.8-2 1.1-3.3.8-1.2-.3-2.8-.9-4.8-2.6-2.4-2-4-4.4-4.5-5.6-.5-1.2-.1-2.9.5-3.9Z" />
+  </svg>
+);
 
 export default function Contact() {
-  const [toastVisible, setToastVisible] = useState(false);
-  const [toastMessage, setToastMessage] = useState("Informação copiada!");
-  const [copiedField, setCopiedField] = useState("");
-  const toastTimer = useRef(null);
+  const [copied, setCopied] = useState('');
+  const [copyError, setCopyError] = useState(false);
+  const feedbackTimerRef = useRef(null);
 
-  useEffect(() => {
-    return () => window.clearTimeout(toastTimer.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (feedbackTimerRef.current) window.clearTimeout(feedbackTimerRef.current);
+    },
+    []
+  );
 
-  const handleCopy = async (value, field) => {
-    const copied = await copyToClipboard(value);
-
-    setToastVisible(false);
-    window.clearTimeout(toastTimer.current);
-
-    if (copied) {
-      setCopiedField(field);
-      setToastMessage("Informação copiada!");
-    } else {
-      setCopiedField("");
-      setToastMessage("Não foi possível copiar.");
+  const writeToClipboard = async value => {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(value);
+      return;
     }
 
-    window.requestAnimationFrame(() => setToastVisible(true));
+    const textArea = document.createElement('textarea');
+    textArea.value = value;
+    textArea.setAttribute('readonly', '');
+    textArea.style.position = 'fixed';
+    textArea.style.opacity = '0';
+    document.body.appendChild(textArea);
+    textArea.select();
+    const copiedSuccessfully = document.execCommand('copy');
+    document.body.removeChild(textArea);
 
-    toastTimer.current = window.setTimeout(() => {
-      setToastVisible(false);
-      setCopiedField("");
-    }, 2000);
+    if (!copiedSuccessfully) {
+      throw new Error('Não foi possível copiar o conteúdo.');
+    }
+  };
+
+  const copyValue = async (value, key) => {
+    try {
+      await writeToClipboard(value);
+      setCopyError(false);
+      setCopied(key);
+      if (feedbackTimerRef.current) window.clearTimeout(feedbackTimerRef.current);
+      feedbackTimerRef.current = window.setTimeout(() => setCopied(''), 1600);
+    } catch {
+      setCopied('');
+      setCopyError(true);
+      if (feedbackTimerRef.current) window.clearTimeout(feedbackTimerRef.current);
+      feedbackTimerRef.current = window.setTimeout(() => setCopyError(false), 2600);
+    }
   };
 
   return (
-    <section className="contact" id="contato">
-      <div className="section-inner">
-        <motion.header
-          className="section-heading contact-heading"
-          initial={{
-            opacity: 0,
-            y: 38,
-            filter: "blur(7px)",
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-          }}
-          viewport={{ once: true, amount: 0.45, margin: "0px 0px -50px 0px" }}
-          transition={{ duration: 0.72, ease }}
-        >
-          <p className="section-eyebrow">Contato</p>
-          <h2 className="section-title">Venha viver essa experiência</h2>
-        </motion.header>
+    <section className="contact" id="contato" data-section="contact">
+      <div className="container">
+        <div className="contact-shell">
+          <div className="contact-list">
+            <article className="contact-card">
+              <div className="contact-icon"><IconPhone /></div>
+              <div className="contact-card-copy">
+                <SplitText text="Telefone / WhatsApp" tag="span" className="contact-card-label" splitType="chars" delay={20} duration={0.5} threshold={0.1} rootMargin="-30px" textAlign="left" from={{ opacity: 0, y: 10 }} to={{ opacity: 1, y: 0 }} />
+                <a href={`tel:${phoneHref}`} className="contact-card-value">
+                  <SplitText text={phoneDisplay} tag="span" className="contact-value-split" splitType="chars" delay={18} duration={0.52} threshold={0.1} rootMargin="-30px" textAlign="left" from={{ opacity: 0, y: 12 }} to={{ opacity: 1, y: 0 }} />
+                </a>
+                <SplitText text="Clique no ícone para copiar" tag="span" className="contact-card-hint" splitType="words" delay={14} duration={0.45} threshold={0.1} rootMargin="-30px" textAlign="left" from={{ opacity: 0, y: 8 }} to={{ opacity: 1, y: 0 }} />
+              </div>
+              <button className={`contact-copy-btn${copied === 'phone' ? ' is-copied' : ''}`} type="button" onClick={() => copyValue(phoneDisplay, 'phone')} aria-label="Copiar telefone">
+                <IconCopy />
+              </button>
+            </article>
 
-        <div className="contact-panel">
-          <motion.div
-            className="contact-options"
-            variants={contactListVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2, margin: "0px 0px -60px 0px" }}
-          >
-            <motion.button
-              type="button"
-              className="contact-card contact-card--copy"
-              variants={contactCardVariants}
-              onClick={() => handleCopy("47 99246-2186", "phone")}
-              whileHover={{
-                y: -3,
-                x: 4,
-                transition: { duration: 0.24 },
-              }}
-              aria-label="Copiar telefone 47 99246-2186"
-            >
-              <span className="contact-icon" aria-hidden="true">
-                <PhoneIcon />
-              </span>
+            <article className="contact-card">
+              <div className="contact-icon"><IconMail /></div>
+              <div className="contact-card-copy">
+                <SplitText text="E-mail" tag="span" className="contact-card-label" splitType="chars" delay={20} duration={0.5} threshold={0.1} rootMargin="-30px" textAlign="left" from={{ opacity: 0, y: 10 }} to={{ opacity: 1, y: 0 }} />
+                <a href={`mailto:${email}`} className="contact-card-value">
+                  <SplitText text={email} tag="span" className="contact-value-split" splitType="chars" delay={12} duration={0.5} threshold={0.1} rootMargin="-30px" textAlign="left" from={{ opacity: 0, y: 12 }} to={{ opacity: 1, y: 0 }} />
+                </a>
+                <SplitText text="Clique no ícone para copiar" tag="span" className="contact-card-hint" splitType="words" delay={14} duration={0.45} threshold={0.1} rootMargin="-30px" textAlign="left" from={{ opacity: 0, y: 8 }} to={{ opacity: 1, y: 0 }} />
+              </div>
+              <button className={`contact-copy-btn${copied === 'email' ? ' is-copied' : ''}`} type="button" onClick={() => copyValue(email, 'email')} aria-label="Copiar e-mail">
+                <IconCopy />
+              </button>
+            </article>
+          </div>
 
-              <span className="contact-card-text">
-                <span className="contact-label">Telefone</span>
-                <strong className="contact-value">47 99246-2186</strong>
-                <span className="contact-helper">
-                  {copiedField === "phone" ? "Copiado!" : "Clique para copiar"}
-                </span>
-              </span>
-
-              <span className="contact-action-icon" aria-hidden="true">
-                <CopyIcon />
-              </span>
-            </motion.button>
-
-            <motion.a
-              href="https://www.instagram.com/joaomolleri_fotopet?igsh=MXI1NDdsbmg3cTRjbw=="
-              className="contact-card"
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={contactCardVariants}
-              whileHover={{
-                y: -3,
-                x: 4,
-                transition: { duration: 0.24 },
-              }}
-            >
-              <span className="contact-icon" aria-hidden="true">
-                <InstagramIcon />
-              </span>
-
-              <span className="contact-card-text">
-                <span className="contact-label">Instagram</span>
-                <strong className="contact-value">@joaomolleri_fotopet</strong>
-                <span className="contact-helper">Abrir perfil</span>
-              </span>
-
-              <span className="contact-action-icon" aria-hidden="true">
-                <ExternalIcon />
-              </span>
-            </motion.a>
-
-            <motion.button
-              type="button"
-              className="contact-card contact-card--copy"
-              variants={contactCardVariants}
-              onClick={() => handleCopy("joaomollerifotopet@gmail.com", "email")}
-              whileHover={{
-                y: -3,
-                x: 4,
-                transition: { duration: 0.24 },
-              }}
-              aria-label="Copiar e-mail joaomollerifotopet@gmail.com"
-            >
-              <span className="contact-icon" aria-hidden="true">
-                <MailIcon />
-              </span>
-
-              <span className="contact-card-text">
-                <span className="contact-label">E-mail</span>
-                <strong className="contact-value">joaomollerifotopet@gmail.com</strong>
-                <span className="contact-helper">
-                  {copiedField === "email" ? "Copiado!" : "Clique para copiar"}
-                </span>
-              </span>
-
-              <span className="contact-action-icon" aria-hidden="true">
-                <CopyIcon />
-              </span>
-            </motion.button>
-          </motion.div>
-
-          <motion.div
-            className="contact-whatsapp"
-            initial={{
-              opacity: 0,
-              x: 58,
-              scale: 0.95,
-              filter: "blur(8px)",
-            }}
-            whileInView={{
-              opacity: 1,
-              x: 0,
-              scale: 1,
-              filter: "blur(0px)",
-            }}
-            viewport={{ once: true, amount: 0.25, margin: "0px 0px -60px 0px" }}
-            transition={{
-              duration: 0.82,
-              delay: 0.12,
-              ease,
-            }}
-          >
-            <motion.span
-              className="contact-whatsapp-icon"
-              aria-hidden="true"
-              initial={{ scale: 0.5, rotate: -30, opacity: 0 }}
-              whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.6,
-                delay: 0.4,
-                ease,
-              }}
-            >
-              <WhatsAppIcon />
-            </motion.span>
-
-            <div>
-              <span className="contact-whatsapp-label">Atendimento direto</span>
-              <h3>Vamos conversar sobre o seu pet?</h3>
-            </div>
-
-            <a
-              href="https://wa.me/5547992462186"
-              className="btn contact-whatsapp-button"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Conversar pelo WhatsApp <span aria-hidden="true">→</span>
+          <aside className="contact-cta-panel">
+            <div className="contact-whatsapp-icon"><IconWhatsapp /></div>
+            <SplitText text="Atendimento direto" tag="span" className="contact-cta-eyebrow" splitType="chars" delay={22} duration={0.5} threshold={0.1} rootMargin="-30px" textAlign="left" from={{ opacity: 0, y: 10 }} to={{ opacity: 1, y: 0 }} />
+            <SplitText text="Vamos conversar sobre o seu próximo projeto?" tag="h2" className="contact-cta-title" splitType="words" delay={42} duration={0.7} threshold={0.1} rootMargin="-30px" textAlign="left" from={{ opacity: 0, y: 28 }} to={{ opacity: 1, y: 0 }} />
+            <SplitText text="Conte o que sua empresa precisa. Vamos entender o cenário e avaliar a melhor solução em desenvolvimento ou dados." tag="p" className="contact-cta-text" splitType="words" delay={14} duration={0.55} threshold={0.1} rootMargin="-30px" textAlign="left" from={{ opacity: 0, y: 16 }} to={{ opacity: 1, y: 0 }} />
+            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="contact-whatsapp-btn">
+              <SplitText text="Conversar pelo WhatsApp" tag="span" className="contact-whatsapp-btn-text" splitType="words" delay={22} duration={0.5} threshold={0.1} rootMargin="-20px" textAlign="center" from={{ opacity: 0, y: 10 }} to={{ opacity: 1, y: 0 }} />
+              <span className="contact-whatsapp-arrow" aria-hidden="true">→</span>
             </a>
-          </motion.div>
+          </aside>
         </div>
       </div>
 
-      <div className="copy-toast-shell" aria-hidden={!toastVisible}>
-        <motion.div
-          className="copy-toast"
-          role="status"
-          aria-live="polite"
-          initial={false}
-          animate={{
-            opacity: toastVisible ? 1 : 0,
-            y: toastVisible ? 0 : 18,
-            scale: toastVisible ? 1 : 0.96,
-            pointerEvents: toastVisible ? "auto" : "none",
-          }}
-          transition={{ duration: 0.28, ease }}
-        >
-          <span aria-hidden="true">✓</span>
-          {toastMessage}
-        </motion.div>
+      <div
+        className={`copy-toast${copied || copyError ? ' is-visible' : ''}${copyError ? ' is-error' : ''}`}
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <span className="copy-toast__check" aria-hidden="true">
+          {copyError ? '!' : '✓'}
+        </span>
+        {copyError
+          ? 'Não foi possível copiar. Selecione o contato manualmente.'
+          : copied === 'phone'
+            ? 'Telefone copiado!'
+            : 'E-mail copiado!'}
       </div>
     </section>
   );

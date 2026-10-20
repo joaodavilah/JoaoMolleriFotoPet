@@ -1,0 +1,117 @@
+.option-wheel {
+  --ow-text-color: #a6a6a6;
+  --ow-active-color: #ffffff;
+  --ow-font-size: 3rem;
+  --ow-inset: 80px;
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+  outline: none;
+  isolation: isolate;
+}
+
+.option-wheel:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.2);
+  outline-offset: -1px;
+}
+
+.option-wheel--dragging {
+  cursor: grabbing;
+}
+
+.option-wheel__item {
+  position: absolute;
+  top: 50%;
+  left: var(--ow-inset);
+  z-index: 1;
+  white-space: nowrap;
+  font-size: var(--ow-font-size);
+  line-height: 1;
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  transform-origin: left center;
+  cursor: pointer;
+  will-change: transform, opacity, filter;
+  color: color-mix(
+    in srgb,
+    var(--ow-active-color) calc(var(--ow-p, 0) * 100%),
+    var(--ow-text-color)
+  );
+  transition:
+    color 240ms ease,
+    text-shadow 240ms ease;
+}
+
+.option-wheel--right .option-wheel__item {
+  left: auto;
+  right: var(--ow-inset);
+  transform-origin: right center;
+}
+
+.option-wheel__item--selected {
+  z-index: 2;
+  font-weight: 500;
+  color: var(--ow-active-color);
+  text-shadow:
+    0 0 18px color-mix(in srgb, var(--ow-active-color) 48%, transparent),
+    0 0 42px color-mix(in srgb, var(--ow-active-color) 18%, transparent);
+}
+
+.option-wheel__item--selected::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -20px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ow-active-color);
+  box-shadow:
+    0 0 10px var(--ow-active-color),
+    0 0 24px color-mix(in srgb, var(--ow-active-color) 58%, transparent);
+  transform: translateY(-50%);
+}
+
+@media (max-width: 720px) {
+  .option-wheel {
+    --ow-inset: 28px !important;
+  }
+
+  .option-wheel__item {
+    max-width: calc(100vw - 76px);
+    overflow: visible;
+    line-height: 1.2;
+    padding-block: 0.1em 0.2em;
+  }
+
+}
+
+@media (max-width: 430px) {
+  .option-wheel {
+    --ow-inset: 22px !important;
+  }
+
+  .option-wheel__item {
+    max-width: calc(100vw - 56px);
+    font-size: clamp(1.05rem, 5.2vw, 1.4rem) !important;
+    line-height: 1.24;
+    padding-block: 0.12em 0.22em;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .option-wheel__item--selected {
+    text-shadow: none;
+  }
+
+  .option-wheel__item--selected::before {
+    display: none;
+  }
+}
