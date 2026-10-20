@@ -27,7 +27,7 @@ export default function Hero() {
     if (paused || shouldReduceMotion || !pageVisible) return;
     const timer = window.setInterval(() => {
       setActiveSlide(current => (current + 1) % slides.length);
-    }, 6500);
+    }, 10000);
     return () => window.clearInterval(timer);
   }, [paused, shouldReduceMotion, pageVisible]);
   const revealProps = delay => ({
