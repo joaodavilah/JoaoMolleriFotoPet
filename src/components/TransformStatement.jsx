@@ -1,116 +1,33 @@
-import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
-import SplitText from './SplitText';
-import TechCarousel from './TechCarousel';
 import './TransformStatement.css';
 
-const rotatingWords = [
-  'Tecnologia',
-  'Inteligência',
-  'Dados',
-  'Visibilidade',
-  'Modernidade'
+// Exemplos temporários: substituir pelas imagens e informações dos trabalhos reais.
+const projects = [
+  { title: 'Entre paisagens', category: 'Filme de marca', description: 'Uma narrativa visual que conecta uma marca à beleza de seus caminhos.', image: '/assets/images/portfolio-paisagem.svg' },
+  { title: 'Encontros', category: 'Histórias e celebrações', description: 'Pequenos gestos e grandes momentos, contados com um olhar sensível.', image: '/assets/images/portfolio-encontros.svg' },
+  { title: 'Em movimento', category: 'Campanha audiovisual', description: 'Ritmo, luz e movimento para dar vida a uma ideia.', image: '/assets/images/portfolio-movimento.svg' }
 ];
 
 export default function TransformStatement() {
-  const [wordIndex, setWordIndex] = useState(0);
-
-  useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      setWordIndex(currentIndex => (currentIndex + 1) % rotatingWords.length);
-    }, 3200);
-
-    return () => window.clearInterval(intervalId);
-  }, []);
-
-  const currentWord = rotatingWords[wordIndex];
-
   return (
-    <section
-      className="transform-statement"
-      id="transformacao"
-      data-section="transform"
-      aria-labelledby="transform-statement-title"
-    >
-      <div className="container transform-statement__inner">
-        <h2 id="transform-statement-title" className="sr-only">
-          Transforme sua empresa com tecnologia, inteligência, dados,
-          visibilidade e modernidade.
-        </h2>
-
-        <SplitText
-          text="Transforme sua empresa com"
-          tag="p"
-          className="transform-statement__lead"
-          reveal="editorial"
-          splitType="words"
-          delay={70}
-          duration={0.8}
-          ease="power3.out"
-          threshold={0.15}
-          rootMargin="-80px"
-          textAlign="center"
-          from={{ opacity: 0, y: 42 }}
-          to={{ opacity: 1, y: 0 }}
-        />
-
-        <div className="transform-statement__word" aria-hidden="true">
-          <div className="transform-statement__gradient">
-            <AnimatePresence mode="wait" initial>
-              <motion.span
-                key={currentWord}
-                className="transform-statement__split-word"
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={{
-                  hidden: {},
-                  visible: {
-                    transition: {
-                      staggerChildren: 0.055
-                    }
-                  },
-                  exit: {
-                    transition: {
-                      staggerChildren: 0.025,
-                      staggerDirection: -1
-                    }
-                  }
-                }}
-              >
-                {Array.from(currentWord).map((character, index) => (
-                  <motion.span
-                    className="transform-statement__char"
-                    key={`${character}-${index}`}
-                    variants={{
-                      hidden: { opacity: 0, y: 44 },
-                      visible: {
-                        opacity: 1,
-                        y: 0,
-                        transition: {
-                          duration: 0.72,
-                          ease: [0.22, 1, 0.36, 1]
-                        }
-                      },
-                      exit: {
-                        opacity: 0,
-                        y: -24,
-                        transition: {
-                          duration: 0.28,
-                          ease: [0.4, 0, 1, 1]
-                        }
-                      }
-                    }}
-                  >
-                    {character}
-                  </motion.span>
-                ))}
-              </motion.span>
-            </AnimatePresence>
-          </div>
+    <section className="portfolio" id="portfolio" data-section="portfolio" aria-labelledby="portfolio-title">
+      <div className="container">
+        <p className="portfolio-eyebrow">Portfólio</p>
+        <h2 id="portfolio-title" className="portfolio-title">Se eu fosse mostrar o que eu tenho de melhor, seria assim:</h2>
+        <p className="portfolio-note">Uma prévia ilustrativa. Em breve, meus filmes por aqui.</p>
+        <div className="portfolio-grid">
+          {projects.map(project => (
+            <article className="portfolio-card" key={project.title} tabIndex={0} aria-label={`${project.title}. Exemplo de ${project.category.toLowerCase()}. ${project.description}`}>
+              <img src={project.image} alt={`Ilustração de exemplo: ${project.title}`} width="960" height="720" loading="lazy" />
+              <span className="portfolio-example">Exemplo</span>
+              <span className="portfolio-play" aria-hidden="true">▷</span>
+              <div className="portfolio-caption">
+                <span className="portfolio-category">{project.category}</span>
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+              </div>
+            </article>
+          ))}
         </div>
-
-        <TechCarousel />
       </div>
     </section>
   );

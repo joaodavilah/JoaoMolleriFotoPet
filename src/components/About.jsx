@@ -1,103 +1,13 @@
-import SplitText from './SplitText';
-import GradientText from './GradientText';
-import PillarsMarquee from './PillarsMarquee';
-
 export default function About() {
   return (
     <section className="about" id="sobre" data-section="about">
       <div className="container about-grid">
-        <div className="about-head">
-          <div className="section-title about-title" role="heading" aria-level="2">
-            <SplitText
-              text="Ajudamos empresas a alcançar"
-              tag="span"
-              className="about-title-line"
-              reveal="editorial"
-              splitType="words"
-              delay={45}
-              duration={0.72}
-              threshold={0.12}
-              rootMargin="-40px"
-              textAlign="left"
-              from={{ opacity: 0, y: 34 }}
-              to={{ opacity: 1, y: 0 }}
-            />
-
-            <GradientText
-              colors={['#214d6d', '#51a7a3', '#2e7fa7']}
-              animationSpeed={4}
-              direction="horizontal"
-              showBorder={false}
-              className="about-gradient-highlight"
-            >
-              voos maiores
-            </GradientText>
-
-            <SplitText
-              text="no mercado digital."
-              tag="span"
-              className="about-title-line"
-              reveal="editorial"
-              splitType="words"
-              delay={45}
-              duration={0.72}
-              threshold={0.12}
-              rootMargin="-40px"
-              textAlign="left"
-              from={{ opacity: 0, y: 34 }}
-              to={{ opacity: 1, y: 0 }}
-            />
-          </div>
-        </div>
-
+        <div className="about-head"><h2 className="section-title about-title">Sobre mim</h2></div>
         <div className="about-body">
-          <SplitText
-            text="Transformando ideias em soluções digitais modernas, funcionais e alinhadas às necessidades de cada negócio. Sites e sistemas que fortalecem a presença da empresa e aproximam ela dos seus clientes."
-            tag="p"
-            className="about-lead"
-            reveal="editorial"
-            splitType="words"
-            delay={18}
-            duration={0.65}
-            threshold={0.12}
-            rootMargin="-35px"
-            textAlign="left"
-            from={{ opacity: 0, y: 24 }}
-            to={{ opacity: 1, y: 0 }}
-          />
-
-          <SplitText
-            text="A tecnologia deve gerar oportunidades, otimizar processos e apoiar o crescimento. E que dados, quando bem interpretados, transformam o dia a dia em decisões mais estratégicas."
-            tag="p"
-            className="about-text"
-            reveal="editorial"
-            splitType="words"
-            delay={14}
-            duration={0.62}
-            threshold={0.12}
-            rootMargin="-30px"
-            textAlign="left"
-            from={{ opacity: 0, y: 20 }}
-            to={{ opacity: 1, y: 0 }}
-          />
-
-          <SplitText
-            text="Unimos estratégia, design, tecnologia e inteligência de dados para desenvolver soluções que realmente agreguem valor ao negócio."
-            tag="p"
-            className="about-text"
-            reveal="editorial"
-            splitType="words"
-            delay={14}
-            duration={0.62}
-            threshold={0.12}
-            rootMargin="-30px"
-            textAlign="left"
-            from={{ opacity: 0, y: 20 }}
-            to={{ opacity: 1, y: 0 }}
-          />
+          <p className="about-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p className="about-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+          <p className="about-text">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
-
-        <PillarsMarquee />
       </div>
     </section>
   );

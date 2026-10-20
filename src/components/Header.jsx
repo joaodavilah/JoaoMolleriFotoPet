@@ -51,21 +51,15 @@ export default function Header() {
         <motion.a
           href="#topo"
           className="logo"
-          aria-label="DAVILA — página inicial"
+          aria-label="João Vitor Molleri | Videomaker — página inicial"
           initial={shouldReduceMotion ? false : { scale: 0.82, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           whileHover={
-            shouldReduceMotion ? undefined : { rotate: 8, scale: 1.05 }
+            shouldReduceMotion ? undefined : { scale: 1.02 }
           }
           transition={{ duration: shouldReduceMotion ? 0 : 0.3 }}
         >
-          <img
-            src="/assets/images/Vector.png"
-            alt=""
-            width="642"
-            height="662"
-            className="logo-vector"
-          />
+          <span className="brand-name">João Vitor Molleri <span className="brand-role">| Videomaker</span></span>
         </motion.a>
 
         <motion.div

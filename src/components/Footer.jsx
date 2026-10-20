@@ -15,6 +15,7 @@ const navigation = [
   ['Início', '#topo'],
   ['Sobre', '#sobre'],
   ['Serviços', '#servicos'],
+  ['Portfólio', '#portfolio'],
   ['Contato', '#contato']
 ];
 
@@ -45,19 +46,13 @@ export default function Footer() {
               <a
                 href="#topo"
                 className="footer-logo"
-                aria-label="DAVILA — voltar ao início"
+                aria-label="João Vitor Molleri — voltar ao início"
                 onClick={scrollToTop}
               >
-                <img
-                  src="/assets/images/Vector.png"
-                  alt=""
-                  width="642"
-                  height="662"
-                  className="footer-logo-vector"
-                />
+                <span>João Vitor Molleri | Videomaker</span>
               </a>
               <SplitText
-                text="Soluções digitais, desenvolvimento e dados para empresas que querem evoluir."
+                text="Audiovisual que comunica e encanta."
                 tag="p"
                 className="footer-tagline"
                 reveal="editorial"
@@ -93,17 +88,17 @@ export default function Footer() {
 
             <div className="footer-meta">
               <span className="footer-column-title">Contato</span>
-              <a href="mailto:guidavilah@outlook.com" className="footer-link">
+              <a href="mailto:whalefilmes@gmail.com" className="footer-link">
                 <SplitText
-                  text="guidavilah@outlook.com"
+                  text="whalefilmes@gmail.com"
                   className="footer-link-split"
                   textAlign="left"
                   {...footerSplit}
                 />
               </a>
-              <a href="tel:+5547999559197" className="footer-link">
+              <a href="tel:+5547992311409" className="footer-link">
                 <SplitText
-                  text="(47) 99955-9197"
+                  text="(47) 99231-1409"
                   className="footer-link-split"
                   textAlign="left"
                   {...footerSplit}
@@ -114,7 +109,7 @@ export default function Footer() {
 
           <div className="footer-bottom">
             <SplitText
-              text="© 2026 Davila. Todos os direitos reservados."
+              text="© 2026 João Vitor Molleri. Todos os direitos reservados."
               tag="p"
               className="footer-copyright"
               reveal="editorial"

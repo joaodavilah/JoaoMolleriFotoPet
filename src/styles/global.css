@@ -2104,3 +2104,20 @@ main,
     font-size: 13px;
   }
 }
+
+/* Identidade do videomaker e navegação da apresentação. */
+.brand-name { font-size: clamp(.9rem, 2vw, 1.25rem); font-weight: 600; color: #f5f5f5; line-height: 1.4; }
+.brand-role { font-weight: 400; color: #a8c8ce; }
+.logo { width: auto; height: auto; text-decoration: none; }
+.hero-scroll-cue { display: inline-flex; flex-direction: column; align-items: center; gap: 12px; color: #d0e1e7; text-decoration: none; font-size: .85rem; letter-spacing: .06em; padding: 12px; }
+.hero-scroll-cue svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.5; animation: scroll-cue 2s ease-in-out infinite; }
+@keyframes scroll-cue { 50% { transform: translateY(8px); } }
+.contact-heading { margin-bottom: 40px; font-size: clamp(2rem, 5vw, 4rem); }
+.contact-shell.contact-shell--simple { display: block; }
+.contact-shell--simple .contact-list { max-width: 900px; margin: 0 auto; }
+.contact-whatsapp-link { color: #9bd8cf; padding: 16px 0; display: inline-block; }
+.footer-logo { width: auto; height: auto; font-size: 1.2rem; color: #f5f5f5; }
+@media (max-width: 600px) { .brand-role { display: block; } .header-inner { gap: 14px; } .contact-card-value { font-size: clamp(.9rem, 4vw, 1.2rem); overflow-wrap: anywhere; } }
+@media (prefers-reduced-motion: reduce) { .hero-scroll-cue svg { animation: none; } }
+.hero-title-line { white-space: normal; }
+@media (max-width: 400px) { .hero-title { font-size: 36px; } .header-specular-button { font-size: .75rem; } .logo { flex: 1 1 auto; justify-content: flex-start; } }

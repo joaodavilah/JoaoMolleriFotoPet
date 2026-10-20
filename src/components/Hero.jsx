@@ -1,11 +1,7 @@
 import { motion, useReducedMotion } from 'motion/react';
 import SoftAurora from './SoftAurora';
-import SpecularButton from './SpecularButton';
 
-const heroTitleLines = [
-  ['Tecnologia', 'para', 'levar', 'negócios'],
-  ['mais', 'longe.']
-];
+const heroTitleLines = [['Audiovisual', 'que'], ['comunica', 'e', 'encanta.']];
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -47,8 +43,8 @@ export default function Hero() {
     }
   });
 
-  const scrollToServices = () => {
-    document.getElementById('servicos')?.scrollIntoView({
+  const scrollToAbout = () => {
+    document.getElementById('sobre')?.scrollIntoView({
       behavior: shouldReduceMotion ? 'auto' : 'smooth'
     });
   };
@@ -104,8 +100,8 @@ export default function Hero() {
             data-animate="fade-up"
             {...revealProps(0.7)}
           >
-            Desenvolvemos websites, sistemas, aplicativos e soluções em dados.
-            Unindo estratégia, design e engenharia para empresas que querem evoluir.
+            Parece que foi ontem. Mas já fazem mais de 12 anos que venho contando
+            histórias no audiovisual. Vem conhecer um pouco mais de quem eu sou.
           </motion.p>
 
           <motion.div
@@ -113,28 +109,16 @@ export default function Hero() {
             data-animate="fade-up"
             {...revealProps(0.92)}
           >
-            <SpecularButton
-              size="lg"
-              radius={18}
-              tint="#ffffff"
-              tintOpacity={0}
-              blur={0}
-              textColor="#f5f5f5"
-              lineColor="#98a1da"
-              baseColor="#525252"
-              intensity={1}
-              shineSize={10}
-              shineFade={40}
-              thickness={1}
-              speed={0.35}
-              followMouse
-              proximity={250}
-              autoAnimate={false}
-              onClick={scrollToServices}
-              className="hero-specular-button"
+            <a
+              href="#sobre"
+              className="hero-scroll-cue"
+              onClick={event => { event.preventDefault(); scrollToAbout(); }}
             >
-              Ver soluções
-            </SpecularButton>
+              <span>Role para conhecer</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3v17m-7-7 7 7 7-7" />
+              </svg>
+            </a>
           </motion.div>
         </div>
       </div>
