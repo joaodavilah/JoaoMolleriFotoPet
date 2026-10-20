@@ -1,10 +1,35 @@
 import { motion, useReducedMotion } from 'motion/react';
-import SoftAurora from './SoftAurora';
+import { useEffect, useState } from 'react';
+import './HeroCarousel.css';
+
+const slides = [
+  { src: '/assets/images/hero-produto.jpeg', label: 'Produção de produto', position: '58% center', shade: '.76' },
+  { src: '/assets/images/hero-criativo.jpeg', label: 'Produção criativa', position: '58% center', shade: '.58' },
+  { src: '/assets/images/hero-retrato.jpeg', label: 'Produção de entrevista', position: '42% center', shade: '.74' }
+];
 
 const heroTitleLines = [['Audiovisual', 'que'], ['comunica', 'e', 'encanta.']];
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [pageVisible, setPageVisible] = useState(true);
+
+  useEffect(() => {
+    const updateVisibility = () => setPageVisible(!document.hidden);
+    updateVisibility();
+    document.addEventListener('visibilitychange', updateVisibility);
+    return () => document.removeEventListener('visibilitychange', updateVisibility);
+  }, []);
+
+  useEffect(() => {
+    if (paused || shouldReduceMotion || !pageVisible) return;
+    const timer = window.setInterval(() => {
+      setActiveSlide(current => (current + 1) % slides.length);
+    }, 6500);
+    return () => window.clearInterval(timer);
+  }, [paused, shouldReduceMotion, pageVisible]);
   const revealProps = delay => ({
     initial: {
       opacity: 0,
@@ -50,27 +75,18 @@ export default function Hero() {
   };
 
   return (
-    <section className="hero" id="hero" data-section="hero">
-      <div className="hero-background" aria-hidden="true">
-        <SoftAurora
-          speed={0.6}
-          scale={1.5}
-          brightness={1.0}
-          color1="#c1d42f"
-          color2="#292d6b"
-          noiseFrequency={2.5}
-          noiseAmplitude={1.0}
-          bandHeight={0.5}
-          bandSpread={1.0}
-          octaveDecay={0.1}
-          layerOffset={0}
-          colorSpeed={1.0}
-          enableMouseInteraction
-          mouseInfluence={0.25}
-        />
+    <section className="hero hero--carousel" id="hero" data-section="hero" data-slide={activeSlide} aria-label="Apresentação de trabalhos audiovisuais" aria-roledescription="carrossel">
+      <div className="hero-background hero-carousel-images" aria-hidden="true">
+        {slides.map((slide, index) => (
+          <div
+            key={slide.src}
+            className={`hero-photo${index === activeSlide ? ' is-active' : ''}`}
+            style={{ '--photo-position': slide.position, '--photo-shade': slide.shade }}
+          >
+            <img src={slide.src} alt="" width="1288" height="727" fetchPriority={index === 0 ? 'high' : 'auto'} decoding="async" />
+          </div>
+        ))}
       </div>
-
-      <div className="hero-overlay" aria-hidden="true" />
 
       <div className="hero-inner">
         <div className="hero-content">
@@ -121,6 +137,23 @@ export default function Hero() {
             </a>
           </motion.div>
         </div>
+      </div>
+      <div className="hero-carousel-controls" role="group" aria-label="Controles das fotos">
+        {slides.map((slide, index) => (
+          <button
+            key={slide.src}
+            type="button"
+            className={`hero-carousel-dot${index === activeSlide ? ' is-active' : ''}`}
+            aria-label={`Mostrar foto ${index + 1}: ${slide.label}`}
+            aria-pressed={index === activeSlide}
+            onClick={() => { setActiveSlide(index); setPaused(true); }}
+          ><span /></button>
+        ))}
+        {!shouldReduceMotion && (
+          <button className="hero-carousel-pause" type="button" onClick={() => setPaused(current => !current)} aria-label={paused ? 'Retomar troca automática das fotos' : 'Pausar troca automática das fotos'}>
+            {paused ? 'Reproduzir' : 'Pausar'}
+          </button>
+        )}
       </div>
     </section>
   );
