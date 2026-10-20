@@ -74,12 +74,12 @@ export default function Header() {
           <SpecularButton
             size="sm"
             radius={24}
-            tint="#ffffff"
+            tint="#e9eaf2"
             tintOpacity={0}
             blur={0}
-            textColor="#f5f5f5"
-            lineColor="#ffffff"
-            baseColor="#525252"
+            textColor="#e9eaf2"
+            lineColor="#e9eaf2"
+            baseColor="#292d6b"
             intensity={1}
             shineSize={10}
             shineFade={40}

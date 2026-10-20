@@ -112,7 +112,6 @@ export default function Contact() {
                 <a href="https://www.instagram.com/whalefilmes/" target="_blank" rel="noreferrer" className="contact-card-value">@whalefilmes</a>
               </div>
             </article>
-            <a className="contact-whatsapp-link" href="https://wa.me/5547992311409" target="_blank" rel="noreferrer">Conversar pelo WhatsApp ↗</a>
           </div>
         </div>
       </div>

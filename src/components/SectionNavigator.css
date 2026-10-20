@@ -16,7 +16,7 @@
   bottom: 13px;
   left: 50%;
   width: 1px;
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(233, 234, 242, 0.16);
   transform: translateX(-50%);
 }
 
@@ -33,7 +33,7 @@
 .section-navigator__dot {
   width: 6px;
   height: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.56);
+  border: 1px solid rgba(233, 234, 242, 0.56);
   border-radius: 50%;
   background: var(--site-bg);
   transition:
@@ -49,10 +49,10 @@
   top: 50%;
   right: 31px;
   padding: 5px 9px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(233, 234, 242, 0.1);
   border-radius: 999px;
-  color: rgba(255, 255, 255, 0.72);
-  background: rgba(13, 11, 18, 0.84);
+  color: rgba(233, 234, 242, 0.72);
+  background: rgba(41, 45, 107, 0.84);
   font-family: var(--font-display);
   font-size: 10px;
   font-weight: 500;
@@ -74,11 +74,11 @@
 .section-navigator__item.is-active .section-navigator__dot {
   width: 11px;
   height: 11px;
-  border-color: #67d5cf;
-  background: #67d5cf;
+  border-color: #c1d42f;
+  background: #c1d42f;
   box-shadow:
-    0 0 12px rgba(103, 213, 207, 0.78),
-    0 0 28px rgba(103, 213, 207, 0.32);
+    0 0 12px rgba(193, 212, 47, 0.78),
+    0 0 28px rgba(193, 212, 47, 0.32);
 }
 
 @media (max-width: 900px) {

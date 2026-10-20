@@ -62,8 +62,8 @@ export default function Services() {
               items={services.map(service => service.title)}
               defaultSelected={2}
               onChange={index => setSelectedIndex(index)}
-              textColor="#696772"
-              activeColor="#67d5cf"
+              textColor="#e9eaf2"
+              activeColor="#c1d42f"
               side="left"
               fontSize={2.15}
               spacing={1.48}
@@ -83,14 +83,14 @@ export default function Services() {
           <BorderGlow
             className="service-detail"
             edgeSensitivity={30}
-            glowColor="177 55 64"
-            backgroundColor="#0d0b12"
+            glowColor="69 75 74"
+            backgroundColor="#292d6b"
             borderRadius={28}
             glowRadius={40}
             glowIntensity={0.9}
             coneSpread={25}
             animated={false}
-            colors={['#214d6d', '#51a7a3', '#38bdf8']}
+            colors={['#c1d42f', '#c1d42f', '#e9eaf2']}
             fillOpacity={0.34}
             aria-live="polite"
           >

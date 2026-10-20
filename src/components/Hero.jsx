@@ -56,8 +56,8 @@ export default function Hero() {
           speed={0.6}
           scale={1.5}
           brightness={1.0}
-          color1="#196a67"
-          color2="#030930"
+          color1="#c1d42f"
+          color2="#292d6b"
           noiseFrequency={2.5}
           noiseAmplitude={1.0}
           bandHeight={0.5}
