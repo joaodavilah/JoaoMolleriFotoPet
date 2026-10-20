@@ -15,22 +15,14 @@ export default function Hero() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [paused, setPaused] = useState(false);
   const [selectionVersion, setSelectionVersion] = useState(0);
-  const [pageVisible, setPageVisible] = useState(true);
-
+  // Cada foto agenda a próxima troca; a navegação manual reinicia os 10 segundos.
   useEffect(() => {
-    const updateVisibility = () => setPageVisible(!document.hidden);
-    updateVisibility();
-    document.addEventListener('visibilitychange', updateVisibility);
-    return () => document.removeEventListener('visibilitychange', updateVisibility);
-  }, []);
-
-  useEffect(() => {
-    if (paused || !pageVisible) return;
-    const timer = window.setInterval(() => {
+    if (paused) return;
+    const timer = window.setTimeout(() => {
       setActiveSlide(current => (current + 1) % slides.length);
     }, 10000);
-    return () => window.clearInterval(timer);
-  }, [paused, pageVisible, selectionVersion]);
+    return () => window.clearTimeout(timer);
+  }, [activeSlide, paused, selectionVersion]);
   const revealProps = delay => ({
     initial: {
       opacity: 0,
@@ -69,11 +61,6 @@ export default function Hero() {
     }
   });
 
-  const scrollToAbout = () => {
-    document.getElementById('sobre')?.scrollIntoView({
-      behavior: shouldReduceMotion ? 'auto' : 'smooth'
-    });
-  };
 
   return (
     <section className="hero hero--carousel" id="hero" data-section="hero" data-slide={activeSlide} aria-label="Apresentação de trabalhos audiovisuais" aria-roledescription="carrossel">
@@ -120,23 +107,6 @@ export default function Hero() {
             Parece que foi ontem. Mas já fazem mais de 12 anos que venho contando
             histórias no audiovisual. Vem conhecer um pouco mais de quem eu sou.
           </motion.p>
-
-          <motion.div
-            className="hero-actions reveal-text"
-            data-animate="fade-up"
-            {...revealProps(0.92)}
-          >
-            <a
-              href="#sobre"
-              className="hero-scroll-cue"
-              onClick={event => { event.preventDefault(); scrollToAbout(); }}
-            >
-              <span>Role para conhecer</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 3v17m-7-7 7 7 7-7" />
-              </svg>
-            </a>
-          </motion.div>
         </div>
       </div>
       <div className="hero-carousel-controls" role="group" aria-label="Controles das fotos">
