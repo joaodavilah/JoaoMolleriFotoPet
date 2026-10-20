@@ -1,11 +1,11 @@
 .hero--carousel { background: #292d6b; }
-.hero-carousel-images .hero-photo { position: absolute; inset: 0; opacity: 0; filter: blur(3px); transition: opacity 2s ease-in-out, filter 2s ease-in-out; }
-.hero-carousel-images .hero-photo.is-active { opacity: 1; filter: blur(0); }
-.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: var(--photo-position); transform: scale(1.04) translateX(-.5%); transition: transform 12s linear; }
+.hero-carousel-images .hero-photo { position: absolute; inset: 0; opacity: 0; transition: opacity 4.5s cubic-bezier(.45, 0, .55, 1); }
+.hero-carousel-images .hero-photo.is-active { opacity: 1; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: var(--photo-position); transform: scale(1.04) translateX(-.5%); transition: transform 16s linear; }
 .hero-photo.is-active img { transform: scale(1.1) translateX(.5%); }
 .hero-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(41,45,107,.7), transparent 32%, rgba(41,45,107,.25) 70%, #292d6b), linear-gradient(rgba(41,45,107,var(--photo-shade)), rgba(41,45,107,var(--photo-shade))); }
 .hero--carousel .hero-title, .hero--carousel .hero-subtitle { color: #e9eaf2; text-shadow: 0 2px 24px rgba(41,45,107,.8); }
-.hero--carousel .hero-title-word { transition: color 1.6s ease; }
+.hero--carousel .hero-title-word { transition: color 4.5s ease-in-out; }
 .hero--carousel[data-slide="1"] .hero-title-line:last-child .hero-title-word:last-child { color: #c1d42f; }
 .hero--carousel .hero-scroll-cue { color: #e9eaf2; }
 .hero--carousel .hero-inner { padding-bottom: 110px; }
@@ -16,7 +16,7 @@
 .hero-carousel-pause { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .hero-carousel-pause:focus-visible { width: auto; height: auto; clip-path: none; overflow: visible; bottom: 48px; left: 50%; transform: translateX(-50%); padding: 10px 16px; background: #292d6b; color: #e9eaf2; border-radius: 8px; }
 @media (prefers-reduced-motion: reduce) {
-  .hero-carousel-images .hero-photo { transition: opacity .6s ease; filter: none; }
+  .hero-carousel-images .hero-photo { transition: opacity 1.5s ease-in-out; }
   .hero--carousel .hero-title-word, .hero-carousel-dot span { transition: none; }
   .hero-photo img, .hero-photo.is-active img { transform: none; transition: none; }
 }
