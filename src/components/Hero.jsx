@@ -14,6 +14,7 @@ export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const [activeSlide, setActiveSlide] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [selectionVersion, setSelectionVersion] = useState(0);
   const [pageVisible, setPageVisible] = useState(true);
 
   useEffect(() => {
@@ -24,12 +25,12 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    if (paused || shouldReduceMotion || !pageVisible) return;
+    if (paused || !pageVisible) return;
     const timer = window.setInterval(() => {
       setActiveSlide(current => (current + 1) % slides.length);
     }, 10000);
     return () => window.clearInterval(timer);
-  }, [paused, shouldReduceMotion, pageVisible]);
+  }, [paused, pageVisible, selectionVersion]);
   const revealProps = delay => ({
     initial: {
       opacity: 0,
@@ -146,14 +147,15 @@ export default function Hero() {
             className={`hero-carousel-dot${index === activeSlide ? ' is-active' : ''}`}
             aria-label={`Mostrar foto ${index + 1}: ${slide.label}`}
             aria-pressed={index === activeSlide}
-            onClick={() => { setActiveSlide(index); setPaused(true); }}
+            onClick={() => {
+              setActiveSlide(index);
+              setSelectionVersion(current => current + 1);
+            }}
           ><span /></button>
         ))}
-        {!shouldReduceMotion && (
           <button className="hero-carousel-pause" type="button" onClick={() => setPaused(current => !current)} aria-label={paused ? 'Retomar troca automática das fotos' : 'Pausar troca automática das fotos'}>
             {paused ? 'Reproduzir' : 'Pausar'}
           </button>
-        )}
       </div>
     </section>
   );
