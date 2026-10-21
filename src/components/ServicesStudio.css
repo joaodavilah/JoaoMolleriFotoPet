@@ -6,9 +6,9 @@
 .studio-caption, .studio-hint { font-size: .75rem; color: rgba(233,234,242,.65); }
 .studio-caption { display: block; padding-left: 30px; }
 .studio-hint { padding: 0 30px; line-height: 1.6; }
-.services--studio .services-wheel-shell { height: 240px; min-height: 0; }
+.services--studio .services-wheel-shell { height: 280px; min-height: 0; }
 .services--studio .services-wheel-shell::after { display: none; }
-.services--studio .services-option-wheel { min-height: 0; height: 240px; }
+.services--studio .services-option-wheel { min-height: 0; height: 280px; }
 .services--studio .option-wheel__item--selected { text-shadow: none; }
 .studio-screen { min-width: 0; padding: 24px 30px 20px; border-radius: 20px; border: 1px solid rgba(233,234,242,.16); background: linear-gradient(135deg, rgba(233,234,242,.045), rgba(0,0,0,.12)); }
 .studio-screen-top { display: flex; justify-content: space-between; gap: 16px; font-size: .65rem; color: rgba(233,234,242,.6); text-transform: uppercase; letter-spacing: .1em; }
@@ -31,7 +31,8 @@
 .studio-timeline .is-active { background: #c1d42f; }
 @media (max-width: 900px) {
   .services--studio .studio-console { grid-template-columns: 1fr; gap: 24px; }
-  .services--studio .services-wheel-shell, .services--studio .services-option-wheel { height: 200px; }
+  .services--studio .services-wheel-shell, .services--studio .services-option-wheel { height: 240px; }
   .studio-screen { padding: 22px; }
 }
-@media (max-width: 400px) { .services--studio .option-wheel__item { font-size: 1.4rem; } }
+.services--studio .services-option-wheel .option-wheel__item { font-size: 2rem; }
+@media (max-width: 900px) { .services--studio .services-option-wheel .option-wheel__item { font-size: clamp(1.55rem, 6vw, 1.8rem); } }
