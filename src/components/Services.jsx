@@ -23,14 +23,12 @@ export default function Services() {
         </header>
         <div className="services-explorer studio-console">
           <div className="studio-selector">
-            <span className="studio-caption">Escolha uma etapa</span>
             <div className="services-wheel-shell">
               <OptionWheel items={services.map(item => item.title)} defaultSelected={0} onChange={setSelectedIndex}
                 textColor="#e9eaf2" activeColor="#c1d42f" fontSize={1.7} spacing={1.4}
                 curve={0.5} tilt={3} blur={0.5} fade={0.08} minOpacity={0.45}
                 smoothing={200} inset={30} loop={false} draggable className="services-option-wheel" />
             </div>
-            <p className="studio-hint">Arraste, clique ou use as setas para explorar.</p>
           </div>
           <div className="studio-screen" aria-live="polite" aria-atomic="true">
             <div className="studio-screen-top"><span><i aria-hidden="true" /> Whale Filmes</span><span aria-hidden="true">0{selectedIndex + 1} / 03</span></div>
