@@ -11,9 +11,7 @@ const biography = [
 export default function About() {
   return (
     <section className="about" id="sobre" data-section="about">
-      <div className="container about-grid">
-        <div className="about-head">
-          <h2 className="section-title about-title">Sobre mim</h2>
+      <div className="container about-grid about-grid--profile">
           <figure className="about-portrait about-portrait--studio">
             <img
               src="/assets/images/joao-molleri-estudio.jpeg"
@@ -23,8 +21,8 @@ export default function About() {
               loading="lazy"
             />
           </figure>
-        </div>
         <div className="about-body">
+          <h2 className="section-title about-title">Sobre mim</h2>
           <p className="about-lead">Contar histórias através de imagens faz parte da minha essência.</p>
           {biography.map(paragraph => <p className="about-text" key={paragraph}>{paragraph}</p>)}
         </div>
