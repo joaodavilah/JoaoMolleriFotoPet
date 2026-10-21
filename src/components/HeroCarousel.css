@@ -28,3 +28,6 @@
 .hero--carousel .hero-actions { display: flex; justify-content: flex-start; }
 .hero--carousel .hero-scroll-cue { padding-left: 0; align-items: flex-start; }
 .hero--carousel .hero-scroll-cue svg { margin-left: 44px; }
+
+.hero--carousel .hero-inner { max-width: none; padding-inline: clamp(24px, 7vw, 132px); transform: translateY(12px); }
+@media (max-width: 600px) { .hero--carousel .hero-inner { transform: none; } }

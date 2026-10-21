@@ -2147,7 +2147,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
 
 /* Fundo discreto do cabeçalho após o início da rolagem. */
 .site-header { transition: background-color 300ms ease, box-shadow 300ms ease; }
-.site-header.is-scrolled { background: rgba(41, 45, 107, .6); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(233, 234, 242, .1); border-radius: 16px; }
+.site-header.is-scrolled { background: rgba(41, 45, 107, .6); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(233, 234, 242, .1); border-radius: 0; }
 @media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
 /* Retrato à esquerda e apresentação completa na coluna direita. */
 .about-grid--profile { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(36px, 6vw, 88px); align-items: stretch; }
@@ -2161,3 +2161,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
   .about-grid--profile .about-portrait { grid-column: 1; grid-row: 1; min-height: 0; aspect-ratio: 4 / 3; }
   .about-grid--profile .about-body { grid-column: 1; grid-row: 2; }
 }
+/* Cabeçalho contínuo até a borda superior, inclusive em telas com recorte. */
+.site-header { top: 0; padding-top: max(18px, env(safe-area-inset-top)); border-radius: 0; }
+@media (max-width: 600px) { .site-header { padding-top: max(10px, env(safe-area-inset-top)); } }
