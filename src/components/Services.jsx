@@ -25,7 +25,7 @@ export default function Services() {
           <div className="studio-selector">
             <div className="services-wheel-shell">
               <OptionWheel items={services.map(item => item.title)} defaultSelected={0} onChange={setSelectedIndex}
-                textColor="#e9eaf2" activeColor="#c1d42f" fontSize={2} spacing={1.2}
+                textColor="#e9eaf2" activeColor="#c1d42f" fontSize={2} spacing={1.6}
                 curve={0.5} tilt={3} blur={0.5} fade={0.08} minOpacity={0.45}
                 smoothing={200} inset={30} loop={false} draggable className="services-option-wheel" />
             </div>
