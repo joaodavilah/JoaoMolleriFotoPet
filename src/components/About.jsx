@@ -22,7 +22,7 @@ export default function About() {
             />
           </figure>
         <div className="about-body">
-          <h2 className="section-title about-title">Sobre mim</h2>
+          <h2 className="section-title about-title">Sobre mim:</h2>
           <p className="about-lead">Contar histórias através de imagens faz parte da minha essência.</p>
           {biography.map(paragraph => <p className="about-text" key={paragraph}>{paragraph}</p>)}
         </div>
