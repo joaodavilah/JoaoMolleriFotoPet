@@ -4,7 +4,7 @@
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: var(--photo-position); transform: scale(1.04) translateX(-.5%); transition: transform 16s linear; }
 .hero-photo.is-active img { transform: scale(1.1) translateX(.5%); }
 .hero-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(41,45,107,.35), transparent 28%, transparent 72%, #292d6b), linear-gradient(rgba(41,45,107,var(--photo-shade)), rgba(41,45,107,var(--photo-shade))); }
-.hero--carousel .hero-title, .hero--carousel .hero-subtitle { color: #e9eaf2; text-shadow: 0 2px 24px rgba(41,45,107,.8); }
+.hero--carousel .hero-title, .hero--carousel .hero-subtitle { color: #e9eaf2; text-shadow: none; }
 .hero--carousel .hero-title-word { transition: color 4.5s ease-in-out; }
 .hero--carousel[data-slide="1"] .hero-title-line:last-child .hero-title-word:last-child { color: #c1d42f; }
 .hero--carousel .hero-scroll-cue { color: #e9eaf2; }
@@ -28,5 +28,3 @@
 .hero--carousel .hero-actions { display: flex; justify-content: flex-start; }
 .hero--carousel .hero-scroll-cue { padding-left: 0; align-items: flex-start; }
 .hero--carousel .hero-scroll-cue svg { margin-left: 44px; }
-
-.hero--carousel .hero-content { background: radial-gradient(ellipse at left center, rgba(41,45,107,.28), transparent 75%); }

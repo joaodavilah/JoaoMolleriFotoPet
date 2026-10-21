@@ -2144,3 +2144,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
 }
 .about-portrait--studio { max-width: 100%; }
 .about-portrait--studio img { aspect-ratio: 4 / 5; object-position: 53% center; }
+
+/* Fundo discreto do cabeçalho após o início da rolagem. */
+.site-header { transition: background-color 300ms ease, box-shadow 300ms ease; }
+.site-header.is-scrolled { background: rgba(41, 45, 107, .6); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(233, 234, 242, .1); border-radius: 16px; }
+@media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }

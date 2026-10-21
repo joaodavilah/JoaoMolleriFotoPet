@@ -4,18 +4,13 @@ import SpecularButton from './SpecularButton';
 
 export default function Header() {
   const shouldReduceMotion = useReducedMotion();
-  const [isPastHero, setIsPastHero] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     let animationFrame;
 
     const updateHeader = () => {
-      const hero = document.getElementById('hero');
-      const threshold = hero
-        ? hero.offsetTop + hero.offsetHeight - 72
-        : window.innerHeight - 72;
-
-      setIsPastHero(window.scrollY >= threshold);
+      setIsScrolled(window.scrollY > 24);
       animationFrame = undefined;
     };
 
@@ -44,7 +39,7 @@ export default function Header() {
 
   return (
     <header
-      className={`site-header${isPastHero ? ' is-past-hero' : ''}`}
+      className={`site-header${isScrolled ? ' is-scrolled' : ''}`}
       id="topo"
     >
       <div className="header-inner">
