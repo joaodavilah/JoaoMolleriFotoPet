@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import './HeroCarousel.css';
 
 const slides = [
-  { src: '/assets/images/hero-produto.jpeg', label: 'Produção de produto', position: '58% center', shade: '.76' },
-  { src: '/assets/images/hero-criativo.jpeg', label: 'Produção criativa', position: '58% center', shade: '.58' },
-  { src: '/assets/images/hero-retrato.jpeg', label: 'Produção de entrevista', position: '42% center', shade: '.74' }
+  { src: '/assets/images/hero-produto.jpeg', label: 'Produção de produto', position: '58% center', shade: '.24' },
+  { src: '/assets/images/hero-criativo.jpeg', label: 'Produção criativa', position: '58% center', shade: '.16' },
+  { src: '/assets/images/hero-retrato.jpeg', label: 'Produção de entrevista', position: '42% center', shade: '.22' }
 ];
 
 const heroTitleLines = [['Audiovisual', 'que'], ['comunica', 'e', 'encanta.']];

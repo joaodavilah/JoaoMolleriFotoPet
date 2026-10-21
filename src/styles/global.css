@@ -2142,3 +2142,5 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
   .contact-shell--simple .contact-card-value { font-size: clamp(.8rem, 3.4vw, 1.1rem); }
   .about-portrait { max-width: 100%; }
 }
+.about-portrait--studio { max-width: 100%; }
+.about-portrait--studio img { aspect-ratio: 4 / 5; object-position: 53% center; }

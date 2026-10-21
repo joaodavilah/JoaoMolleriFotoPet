@@ -6,33 +6,21 @@ import BorderGlow from './BorderGlow';
 
 const services = [
   {
-    title: 'Landing Pages',
-    description: 'Criamos páginas modernas, responsivas e direcionadas para objetivos específicos, como apresentar um serviço, divulgar um produto ou transformar visitantes em novos contatos para a empresa.'
+    title: 'Gravação de vídeos',
+    description: 'Registro sua história com um olhar atento à luz, ao enquadramento e aos detalhes que fazem a diferença.'
   },
   {
-    title: 'Sites Institucionais',
-    description: 'Desenvolvemos sites completos e personalizados para empresas que desejam fortalecer sua presença digital, apresentar seus serviços, portfólio e canais de contato com clareza, desempenho e credibilidade.'
+    title: 'Roteirização',
+    description: 'Transformo sua ideia em um roteiro claro e envolvente, com uma narrativa que conecta sua mensagem ao público.'
   },
   {
-    title: 'Aplicativos',
-    description: 'Desenvolvemos aplicativos personalizados de acordo com as necessidades de cada projeto, criando experiências práticas e novas formas de interação entre empresas, clientes e colaboradores.'
-  },
-  {
-    title: 'Sistemas Personalizados',
-    description: 'Criamos sistemas sob medida para os processos de cada empresa, centralizando informações, automatizando rotinas e oferecendo mais controle, eficiência e escalabilidade para a operação.'
-  },
-  {
-    title: 'Dashboards em Power BI',
-    description: 'Transformamos dados em informações estratégicas por meio de dashboards interativos, indicadores e visualizações que facilitam o acompanhamento de resultados e apoiam decisões mais assertivas.'
-  },
-  {
-    title: 'Dashboard em Python',
-    description: 'Dashboards personalizados com maior flexibilidade de interface, processamento e integração de dados.'
+    title: 'Edição de vídeos',
+    description: 'Dou ritmo e identidade às imagens, unindo cortes, som e cor para contar sua história.'
   }
 ];
 
 export default function Services() {
-  const [selectedIndex, setSelectedIndex] = useState(2);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const selectedService = services[selectedIndex];
   const shouldReduceMotion = useReducedMotion();
 
@@ -41,7 +29,7 @@ export default function Services() {
       <div className="container">
         <header className="services-head">
           <SplitText
-            text="Podemos ajudar sua empresa com:"
+            text="Posso te ajudar com:"
             tag="h2"
             className="section-title services-title-split"
             reveal="editorial"
@@ -60,7 +48,7 @@ export default function Services() {
           <div className="services-wheel-shell" aria-label="Selecione um serviço">
             <OptionWheel
               items={services.map(service => service.title)}
-              defaultSelected={2}
+              defaultSelected={0}
               onChange={index => setSelectedIndex(index)}
               textColor="#e9eaf2"
               activeColor="#c1d42f"
