@@ -2172,3 +2172,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
 .header-contact-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 5px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left center; transition: transform 300ms ease; }
 .header-contact-link:hover::after, .header-contact-link:focus-visible::after { transform: scaleX(1); }
 @media (prefers-reduced-motion: reduce) { .site-header, .header-contact-link::after { transition: none; } }
+/* Rodapé em faixa de largura total, com contraste claro na paleta da marca. */
+.site-footer { background: #e9eaf2; color: #292d6b; padding: clamp(56px, 6vw, 88px) 0 24px; }
+.site-footer > .container { max-width: 1680px; padding-inline: clamp(24px, 5vw, 96px); }
+.site-footer .footer-inner { padding: 0 0 48px; }
+.site-footer .footer-logo { color: #292d6b; font-weight: 600; }
+.site-footer .footer-tagline, .site-footer .footer-link, .site-footer .footer-back-to-top { color: rgba(41,45,107,.8); }
+.site-footer .footer-column-title { color: #292d6b; font-weight: 600; }
+.site-footer .footer-link:hover, .site-footer .footer-back-to-top:hover { color: #292d6b; text-decoration: underline; text-underline-offset: 4px; }
+.site-footer .footer-bottom { padding: 24px 0 0; border-top: 1px solid rgba(41,45,107,.16); }
+.site-footer .footer-bottom p { color: rgba(41,45,107,.7); }
+.site-footer a:focus-visible { outline-color: #292d6b; }

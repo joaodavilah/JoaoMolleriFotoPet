@@ -40,7 +40,6 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="container">
-        <div className="footer-panel">
           <div className="footer-inner">
             <div className="footer-brand">
               <a
@@ -130,7 +129,6 @@ export default function Footer() {
               Voltar ao topo <span aria-hidden="true">↑</span>
             </a>
           </div>
-        </div>
       </div>
     </footer>
   );
