@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import './TransformStatement.css';
 
 const projects = [
@@ -11,6 +12,8 @@ const projects = [
 
 export default function TransformStatement() {
   const [activeVideo, setActiveVideo] = useState(null);
+  const [direction, setDirection] = useState(1);
+  const reducedMotion = useReducedMotion();
   const [activeProject, setActiveProject] = useState(0);
   const trackRef = useRef(null);
   const stageRef = useRef(null);
@@ -26,6 +29,7 @@ export default function TransformStatement() {
       const step = (track.offsetHeight - stage.offsetHeight) / (projects.length - 1);
       const next = Math.max(0, Math.min(projects.length - 1, Math.round(-track.getBoundingClientRect().top / Math.max(step, 1))));
       if (next !== activeProjectRef.current) {
+        setDirection(next > activeProjectRef.current ? 1 : -1);
         activeProjectRef.current = next;
         setActiveProject(next);
         setActiveVideo(null);
@@ -50,6 +54,21 @@ export default function TransformStatement() {
     window.scrollTo({ top: window.scrollY + track.getBoundingClientRect().top + index * step, behavior: 'instant' });
   };
   const project = projects[activeProject];
+  const panelMotion = {
+    hidden: travelDirection => ({ opacity: 0, x: reducedMotion ? 0 : `${travelDirection * 12}vw` }),
+    visible: {
+      opacity: 1, x: 0,
+      transition: { duration: reducedMotion ? 0.15 : 0.8, ease: [0.22, 1, 0.36, 1], staggerChildren: reducedMotion ? 0 : 0.1 }
+    },
+    exit: travelDirection => ({
+      opacity: 0, x: reducedMotion ? 0 : `${travelDirection * -10}vw`,
+      transition: { duration: reducedMotion ? 0.1 : 0.45, ease: [0.4, 0, 0.6, 1] }
+    })
+  };
+  const elementMotion = {
+    hidden: { opacity: 0, y: reducedMotion ? 0 : 18 },
+    visible: { opacity: 1, y: 0, transition: { duration: reducedMotion ? 0.15 : 0.65, ease: [0.22, 1, 0.36, 1] } }
+  };
 
   return (
     <section className="portfolio" id="portfolio" data-section="portfolio" aria-labelledby="portfolio-title">
@@ -60,8 +79,9 @@ export default function TransformStatement() {
       <div className="portfolio-scroll-track" ref={trackRef}>
         <div className="portfolio-stage" ref={stageRef}>
           <div className="portfolio-stage-content">
-            <article className={`portfolio-project${activeProject % 2 ? ' is-reversed' : ''}`} key={project.videoId} aria-labelledby={`project-${project.videoId}`}>
-              <div className="portfolio-video-frame">
+            <AnimatePresence mode="wait" custom={direction}>
+            <motion.article custom={direction} variants={panelMotion} initial="hidden" animate="visible" exit="exit" className={`portfolio-project${activeProject % 2 ? ' is-reversed' : ''}`} key={project.videoId} aria-labelledby={`project-${project.videoId}`}>
+              <motion.div className="portfolio-video-frame" variants={elementMotion}>
                 {activeVideo === project.videoId ? (
                   <iframe
                     src={`https://www.youtube-nocookie.com/embed/${project.videoId}?autoplay=1&playsinline=1&rel=0&hl=pt-BR`}
@@ -76,16 +96,17 @@ export default function TransformStatement() {
                     <span className="portfolio-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z" /></svg></span>
                   </button>
                 )}
-              </div>
-              <div className="portfolio-project-copy">
+              </motion.div>
+              <motion.div className="portfolio-project-copy" variants={elementMotion}>
                 <h3 id={`project-${project.videoId}`}>{project.title}</h3>
                 <p>{project.description}</p>
                 <div className="portfolio-project-actions">
                   <a href={`https://www.youtube.com/watch?v=${project.videoId}`} target="_blank" rel="noreferrer" aria-label={`Assistir ${project.title} no YouTube`}>Assistir no YouTube ↗</a>
                   {activeVideo === project.videoId && <button type="button" onClick={() => setActiveVideo(null)} aria-label={`Parar vídeo de ${project.title}`}>Parar vídeo</button>}
                 </div>
-              </div>
-            </article>
+              </motion.div>
+            </motion.article>
+            </AnimatePresence>
           </div>
           <nav className="portfolio-project-nav" aria-label="Projetos do portfólio">
             {projects.map((item, index) => (
