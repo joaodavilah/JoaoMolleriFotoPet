@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './TransformStatement.css';
 
 const projects = [
@@ -11,15 +11,56 @@ const projects = [
 
 export default function TransformStatement() {
   const [activeVideo, setActiveVideo] = useState(null);
+  const [activeProject, setActiveProject] = useState(0);
+  const trackRef = useRef(null);
+  const stageRef = useRef(null);
+  const activeProjectRef = useRef(0);
+
+  useEffect(() => {
+    let frame;
+    const update = () => {
+      frame = null;
+      const track = trackRef.current;
+      const stage = stageRef.current;
+      if (!track || !stage) return;
+      const step = (track.offsetHeight - stage.offsetHeight) / (projects.length - 1);
+      const next = Math.max(0, Math.min(projects.length - 1, Math.round(-track.getBoundingClientRect().top / Math.max(step, 1))));
+      if (next !== activeProjectRef.current) {
+        activeProjectRef.current = next;
+        setActiveProject(next);
+        setActiveVideo(null);
+      }
+    };
+    const schedule = () => { if (frame == null) frame = requestAnimationFrame(update); };
+    update();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    return () => {
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      if (frame != null) cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  const navigateToProject = index => {
+    const track = trackRef.current;
+    const stage = stageRef.current;
+    if (!track || !stage) return;
+    const step = (track.offsetHeight - stage.offsetHeight) / (projects.length - 1);
+    window.scrollTo({ top: window.scrollY + track.getBoundingClientRect().top + index * step, behavior: 'instant' });
+  };
+  const project = projects[activeProject];
 
   return (
     <section className="portfolio" id="portfolio" data-section="portfolio" aria-labelledby="portfolio-title">
       <div className="container">
         <p className="portfolio-eyebrow">Portfólio</p>
         <h2 id="portfolio-title" className="portfolio-title">Se eu fosse mostrar o que eu tenho de melhor, seria assim:</h2>
-        <div className="portfolio-projects">
-          {projects.map(project => (
-            <article className="portfolio-project" key={project.videoId} aria-labelledby={`project-${project.videoId}`}>
+      </div>
+      <div className="portfolio-scroll-track" ref={trackRef}>
+        <div className="portfolio-stage" ref={stageRef}>
+          <div className="portfolio-stage-content">
+            <article className={`portfolio-project${activeProject % 2 ? ' is-reversed' : ''}`} key={project.videoId} aria-labelledby={`project-${project.videoId}`}>
               <div className="portfolio-video-frame">
                 {activeVideo === project.videoId ? (
                   <iframe
@@ -45,7 +86,16 @@ export default function TransformStatement() {
                 </div>
               </div>
             </article>
-          ))}
+          </div>
+          <nav className="portfolio-project-nav" aria-label="Projetos do portfólio">
+            {projects.map((item, index) => (
+              <button key={item.videoId} type="button" onClick={() => navigateToProject(index)}
+                className={index === activeProject ? 'is-active' : ''}
+                aria-label={`Ver projeto ${index + 1}: ${item.title}`} aria-current={index === activeProject ? 'step' : undefined}>
+                {String(index + 1).padStart(2, '0')}
+              </button>
+            ))}
+          </nav>
         </div>
       </div>
     </section>
