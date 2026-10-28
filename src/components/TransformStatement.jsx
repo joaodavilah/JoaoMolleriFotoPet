@@ -3,11 +3,32 @@ import { motion, useReducedMotion } from 'motion/react';
 import './TransformStatement.css';
 
 const projects = [
-  { title: 'Plasvale', videoId: 'CbSL5j4cmkg', description: 'Imagens que conectam a marca ao seu público.' },
-  { title: 'Leprime', videoId: 'OP3Ka3udcBw', description: 'Uma história contada com ritmo e identidade.' },
-  { title: 'Incita Fashion', videoId: '1PfUrb1HzOI', description: 'Um olhar criativo para dar vida à marca.' },
-  { title: 'Grupo Oceanic', videoId: 'VIk9pD13rDc', description: 'Propósito e identidade traduzidos em imagens.' },
-  { title: 'Dynamis', videoId: 'tNm-9G6WmVY', description: 'Audiovisual para comunicar e inspirar.' }
+  {
+    title: 'Plasvale',
+    videoId: 'CbSL5j4cmkg',
+    description: 'A Plasvale é uma fabricante que cria soluções em plástico para uso doméstico. Este é um b-roll proveniente de diversos vídeos que produzi para a empresa.'
+  },
+  {
+    title: 'Le Prime',
+    videoId: 'OP3Ka3udcBw',
+    description: 'Este filme apresenta um dos valores e projetos da Le Prime, uma construtora sediada em Porto Belo, Brasil. A empresa patrocina a escola de vela da cidade. Por isso, em parceria com a agência Relaciona, contamos essa história por meio deste filme.'
+  },
+  {
+    title: 'Incita Fashion',
+    videoId: '1PfUrb1HzOI',
+    description: 'Campanha de moda para uma marca regional: Incita. A ideia foi trazer uma atmosfera mais futurista para a produção.'
+  },
+  {
+    title: 'Grupo Oceanic',
+    videoId: 'VIk9pD13rDc',
+    description: 'O Oceanic Group possui diversas empresas em Balneário Camboriú, cidade litorânea brasileira. Uma de suas marcas mais conhecidas é o aquário da cidade. Este vídeo é uma compilação, realizada em parceria com Jefferson Cherobin, que apresenta várias imagens dos animais que registramos no local.'
+  },
+  {
+    title: 'Dynamis',
+    videoId: 'tNm-9G6WmVY',
+    description: 'A Dynamis é uma empresa que oferece produtos de energia solar e sustentável.\n\nO desafio, aqui, foi dar voz à cultura da empresa por meio de um manifesto audiovisual.',
+    credit: 'Texto: Tatyele Rivera'
+  }
 ];
 
 export default function TransformStatement() {
@@ -49,6 +70,7 @@ export default function TransformStatement() {
               <div className="portfolio-project-copy">
                 <h3 id={`project-${project.videoId}`}>{project.title}</h3>
                 <p>{project.description}</p>
+                {project.credit && <p className="portfolio-credit">{project.credit}</p>}
                 <div className="portfolio-project-actions">
                   <a href={`https://www.youtube.com/watch?v=${project.videoId}`} target="_blank" rel="noreferrer" aria-label={`Assistir ${project.title} no YouTube`}>Assistir no YouTube ↗</a>
                   {activeVideo === project.videoId && <button type="button" onClick={() => setActiveVideo(null)} aria-label={`Parar vídeo de ${project.title}`}>Parar vídeo</button>}
