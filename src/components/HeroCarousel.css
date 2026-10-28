@@ -31,3 +31,4 @@
 
 .hero--carousel .hero-inner { max-width: none; padding-inline: clamp(24px, 7vw, 132px); transform: translateY(12px); }
 @media (max-width: 600px) { .hero--carousel .hero-inner { transform: none; } }
+.hero--carousel .hero-title-line:last-child { font-weight: 600; }

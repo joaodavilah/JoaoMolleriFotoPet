@@ -2107,7 +2107,7 @@ main,
 
 /* Identidade do videomaker e navegação da apresentação. */
 .brand-name { font-size: clamp(.9rem, 2vw, 1.25rem); font-weight: 600; color: #e9eaf2; line-height: 1.4; }
-.brand-role { font-weight: 400; color: #c1d42f; }
+.brand-role { font-weight: 600; color: #c1d42f; }
 .logo { width: auto; height: auto; text-decoration: none; }
 .hero-scroll-cue { display: inline-flex; flex-direction: column; align-items: center; gap: 12px; color: #e9eaf2; text-decoration: none; font-size: .85rem; letter-spacing: .06em; padding: 12px; }
 .hero-scroll-cue svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.5; animation: scroll-cue 2s ease-in-out infinite; }
@@ -2150,7 +2150,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
 .site-header.is-scrolled { background: rgba(255, 255, 255, .035); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(233, 234, 242, .1); border-radius: 0; }
 @media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
 /* Biografia à esquerda e retrato integrado ao fundo à direita. */
-.about-grid--profile { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 4vw, 60px); align-items: stretch; }
+.about-grid--profile { max-width: 1680px; padding-inline: clamp(24px, 5vw, 96px); grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(32px, 4vw, 60px); align-items: stretch; }
 .about-grid--profile .about-portrait { grid-column: 2; grid-row: 1; margin: 0; position: relative; min-height: 0; aspect-ratio: 4 / 5; align-self: center; overflow: hidden; border-radius: 0; mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent), linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent), linear-gradient(to bottom, transparent, #000 4%, #000 96%, transparent); }
 .about-grid--profile .about-portrait { mask-composite: intersect; -webkit-mask-composite: source-in; }
 .about-grid--profile .about-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; object-position: 53% center; border: 0; border-radius: 0; }
@@ -2165,3 +2165,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--signal); outlin
 /* Cabeçalho contínuo até a borda superior, inclusive em telas com recorte. */
 .site-header { top: 0; padding-top: max(10px, env(safe-area-inset-top)); padding-bottom: 10px; border-radius: 0; }
 @media (max-width: 600px) { .site-header { padding-top: max(8px, env(safe-area-inset-top)); padding-bottom: 8px; } }
+/* Cabeçalho disponível apenas depois da apresentação inicial. */
+.site-header { opacity: 0; visibility: hidden; transform: translateY(-100%); pointer-events: none; transition: opacity 300ms ease, transform 300ms ease, visibility 300ms; }
+.site-header.is-scrolled { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
+.header-contact-link { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 8px 0; color: #e9eaf2; background: none; border: 0; border-radius: 0; box-shadow: none; text-decoration: none; white-space: nowrap; font-size: .85rem; }
+.header-contact-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 5px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left center; transition: transform 300ms ease; }
+.header-contact-link:hover::after, .header-contact-link:focus-visible::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) { .site-header, .header-contact-link::after { transition: none; } }
