@@ -55,19 +55,19 @@ export default function TransformStatement() {
   };
   const project = projects[activeProject];
   const panelMotion = {
-    hidden: travelDirection => ({ opacity: 0, x: reducedMotion ? 0 : `${travelDirection * 12}vw` }),
+    hidden: travelDirection => ({ opacity: 0, x: reducedMotion ? 0 : `${travelDirection * 100}vw` }),
     visible: {
-      opacity: 1, x: 0,
-      transition: { duration: reducedMotion ? 0.15 : 0.8, ease: [0.22, 1, 0.36, 1], staggerChildren: reducedMotion ? 0 : 0.1 }
+      opacity: reducedMotion ? 1 : [0, 1, 1], x: 0,
+      transition: { duration: reducedMotion ? 0.15 : 2, ease: [0.25, 0.1, 0.25, 1], times: [0, 0.2, 1], staggerChildren: reducedMotion ? 0 : 0.15 }
     },
     exit: travelDirection => ({
-      opacity: 0, x: reducedMotion ? 0 : `${travelDirection * -10}vw`,
-      transition: { duration: reducedMotion ? 0.1 : 0.45, ease: [0.4, 0, 0.6, 1] }
+      opacity: reducedMotion ? 0 : [1, 1, 0], x: reducedMotion ? 0 : `${travelDirection * -100}vw`,
+      transition: { duration: reducedMotion ? 0.1 : 1.8, ease: [0.45, 0, 0.55, 1], times: [0, 0.8, 1] }
     })
   };
   const elementMotion = {
     hidden: { opacity: 0, y: reducedMotion ? 0 : 18 },
-    visible: { opacity: 1, y: 0, transition: { duration: reducedMotion ? 0.15 : 0.65, ease: [0.22, 1, 0.36, 1] } }
+    visible: { opacity: 1, y: 0, transition: { duration: reducedMotion ? 0.15 : 0.95, ease: [0.22, 1, 0.36, 1] } }
   };
 
   return (
