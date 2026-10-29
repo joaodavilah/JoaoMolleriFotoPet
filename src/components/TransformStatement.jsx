@@ -30,9 +30,9 @@ const projects = [
     credit: 'Texto: Tatyele Rivera'
   },
   {
-    title: 'Resumo dos trabalhos',
+    title: 'B-roll',
     videoId: 's8uD25KHajE',
-    description: 'Uma seleção de imagens e momentos de diferentes produções, reunindo um pouco do meu olhar e dos trabalhos que realizei no audiovisual.'
+    description: 'Compilado dos meus trabalhos'
   }
 ];
 
