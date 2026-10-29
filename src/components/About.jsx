@@ -14,10 +14,10 @@ export default function About() {
       <div className="container about-grid about-grid--profile">
           <figure className="about-portrait about-portrait--studio">
             <img
-              src="/assets/images/joao-molleri-estudio.jpeg"
-              alt="João Vitor Molleri sentado em um estúdio de produção audiovisual"
-              width="1026"
-              height="700"
+              src="/assets/images/joao-molleri-retrato-estudio.jpg"
+              alt="João Vitor Molleri segurando uma câmera em um estúdio audiovisual"
+              width="1600"
+              height="1067"
               loading="lazy"
             />
           </figure>
