@@ -1,0 +1,13 @@
+.hero--video { background: #292d6b; }
+.hero-video-background { background: #292d6b url('/assets/images/hero-broll-poster.jpg') center / cover no-repeat; }
+.hero-background-video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.hero-video-background::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(41,45,107,.52), rgba(41,45,107,.2) 75%), linear-gradient(180deg, rgba(41,45,107,.12), transparent 60%, #292d6b); }
+.hero--video .hero-title, .hero--video .hero-subtitle { color: #e9eaf2; text-shadow: none; }
+.hero--video .hero-inner { justify-content: flex-start; max-width: none; padding-inline: clamp(24px, 7vw, 132px); padding-bottom: 110px; transform: translateY(12px); }
+.hero--video .hero-content { align-items: flex-start; text-align: left; max-width: 900px; }
+.hero--video .hero-title, .hero--video .hero-title-line { text-align: left; margin-inline: 0; }
+.hero--video .hero-title-line:last-child { font-weight: 600; }
+.hero--video .hero-subtitle { text-align: left; margin-inline: 0; max-width: 60ch; }
+.hero-video-toggle { position: absolute; z-index: 3; bottom: 24px; right: clamp(24px, 5vw, 96px); display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 12px; border: 1px solid rgba(233,234,242,.25); border-radius: 6px; background: rgba(41,45,107,.35); color: #e9eaf2; font: inherit; font-size: .7rem; cursor: pointer; }
+.hero-video-toggle:hover { background: rgba(41,45,107,.65); }
+@media (max-width: 600px) { .hero--video .hero-inner { transform: none; } }

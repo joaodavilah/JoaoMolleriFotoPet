@@ -1,76 +1,77 @@
-import { useEffect, useState } from 'react';
-import './HeroCarousel.css';
+import { useEffect, useRef, useState } from 'react';
+import { useReducedMotion } from 'motion/react';
+import './HeroVideo.css';
 
-const slides = [
-  { src: '/assets/images/hero-produto.jpeg', label: 'Produção de produto', position: '58% center', shade: '.24' },
-  { src: '/assets/images/hero-criativo.jpeg', label: 'Produção criativa', position: '58% center', shade: '.16' },
-  { src: '/assets/images/hero-retrato.jpeg', label: 'Produção de entrevista', position: '42% center', shade: '.22' }
-];
-
-const heroTitleLines = [['Audiovisual', 'que'], ['comunica', 'e', 'encanta.']];
+const heroTitleLines = ['Audiovisual que', 'comunica e encanta.'];
 
 export default function Hero() {
+  const videoRef = useRef(null);
+  const heroRef = useRef(null);
+  const reducedMotion = useReducedMotion();
+  const [playbackPreference, setPlaybackPreference] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const wantsPlayback = playbackPreference ?? !reducedMotion;
 
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [selectionVersion, setSelectionVersion] = useState(0);
-  // Cada foto agenda a próxima troca; a navegação manual reinicia os 10 segundos.
   useEffect(() => {
-    if (paused) return;
-    const timer = window.setTimeout(() => {
-      setActiveSlide(current => (current + 1) % slides.length);
-    }, 10000);
-    return () => window.clearTimeout(timer);
-  }, [activeSlide, paused, selectionVersion]);
+    const video = videoRef.current;
+    const hero = heroRef.current;
+    if (!video || !hero) return;
+    let visible = hero.getBoundingClientRect().bottom > 0 && hero.getBoundingClientRect().top < window.innerHeight;
+    const syncPlayback = () => {
+      if (!wantsPlayback || !visible || document.hidden) {
+        video.pause();
+        return;
+      }
+      // Alguns navegadores bloqueiam autoplay; o controle permite iniciar manualmente.
+      video.play().catch(() => {});
+    };
+    const observer = new IntersectionObserver(entries => {
+      visible = entries[0].isIntersecting;
+      syncPlayback();
+    });
+    observer.observe(hero);
+    document.addEventListener('visibilitychange', syncPlayback);
+    syncPlayback();
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', syncPlayback);
+      video.pause();
+    };
+  }, [wantsPlayback]);
 
   return (
-    <section className="hero hero--carousel" id="hero" data-section="hero" data-slide={activeSlide} aria-label="Apresentação de trabalhos audiovisuais" aria-roledescription="carrossel">
-      <div className="hero-background hero-carousel-images" aria-hidden="true">
-        {slides.map((slide, index) => (
-          <div
-            key={slide.src}
-            className={`hero-photo${index === activeSlide ? ' is-active' : ''}`}
-            style={{ '--photo-position': slide.position, '--photo-shade': slide.shade }}
-          >
-            <img src={slide.src} alt="" width="1288" height="727" fetchPriority={index === 0 ? 'high' : 'auto'} decoding="async" />
-          </div>
-        ))}
+    <section className="hero hero--video" id="hero" data-section="hero" ref={heroRef} aria-label="Apresentação de trabalhos audiovisuais">
+      <div className="hero-background hero-video-background" aria-hidden="true">
+        <video
+          ref={videoRef}
+          className="hero-background-video"
+          autoPlay={wantsPlayback}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/assets/images/hero-broll-poster.jpg"
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+        >
+          <source src="/assets/videos/hero-broll.mp4" type="video/mp4" />
+        </video>
       </div>
-
       <div className="hero-inner">
         <div className="hero-content">
           <h1 className="hero-title hero-blur-title">
-            {heroTitleLines.map(line => (
-              <span className="hero-title-line" key={line.join('-')}>
-                {line.join(' ')}
-              </span>
-            ))}
+            {heroTitleLines.map(line => <span className="hero-title-line" key={line}>{line}</span>)}
           </h1>
-
           <p className="hero-subtitle">
             Parece que foi ontem. Mas já fazem mais de 12 anos que venho contando
             histórias no audiovisual. Vem conhecer um pouco mais de quem eu sou.
           </p>
         </div>
       </div>
-      <div className="hero-carousel-controls" role="group" aria-label="Controles das fotos">
-        {slides.map((slide, index) => (
-          <button
-            key={slide.src}
-            type="button"
-            className={`hero-carousel-dot${index === activeSlide ? ' is-active' : ''}`}
-            aria-label={`Mostrar foto ${index + 1}: ${slide.label}`}
-            aria-pressed={index === activeSlide}
-            onClick={() => {
-              setActiveSlide(index);
-              setSelectionVersion(current => current + 1);
-            }}
-          ><span /></button>
-        ))}
-          <button className="hero-carousel-pause" type="button" onClick={() => setPaused(current => !current)} aria-label={paused ? 'Retomar troca automática das fotos' : 'Pausar troca automática das fotos'}>
-            {paused ? 'Reproduzir' : 'Pausar'}
-          </button>
-      </div>
+      <button className="hero-video-toggle" type="button" onClick={() => setPlaybackPreference(!isPlaying)} aria-label={isPlaying ? 'Pausar vídeo de fundo' : 'Reproduzir vídeo de fundo'}>
+        <span aria-hidden="true">{isPlaying ? 'Ⅱ' : '▷'}</span>
+        {isPlaying ? 'Pausar vídeo' : 'Reproduzir vídeo'}
+      </button>
     </section>
   );
 }
