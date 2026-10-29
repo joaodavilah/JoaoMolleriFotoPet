@@ -57,6 +57,7 @@ export default function TransformStatement() {
               transition={{ duration: reducedMotion ? 0 : 0.85, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="portfolio-video-frame">
+                <div className="portfolio-video-surface">
                 {activeVideo === project.videoId ? (
                   <iframe
                     src={`https://www.youtube-nocookie.com/embed/${project.videoId}?autoplay=1&playsinline=1&rel=0&hl=pt-BR`}
@@ -71,6 +72,7 @@ export default function TransformStatement() {
                     <span className="portfolio-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z" /></svg></span>
                   </button>
                 )}
+                </div>
               </div>
               <div className="portfolio-project-copy">
                 <h3 id={`project-${project.videoId}`}>{project.title}</h3>

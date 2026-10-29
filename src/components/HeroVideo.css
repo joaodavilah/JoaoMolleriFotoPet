@@ -9,9 +9,9 @@
 .hero--video .hero-title { font-size: clamp(34px, 4.3vw, 60px); }
 .hero--video .hero-title-line:last-child { font-weight: 600; }
 .hero--video .hero-subtitle { text-align: left; margin-inline: 0; max-width: 60ch; font-size: clamp(13px, 1vw, 16px); }
-.hero-video-toggle { position: absolute; z-index: 3; bottom: 24px; right: clamp(24px, 5vw, 96px); display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid rgba(233,234,242,.25); border-radius: 8px; background: rgba(41,45,107,.35); color: #e9eaf2; cursor: pointer; }
+.hero-video-toggle { position: absolute; z-index: 3; bottom: 24px; right: clamp(24px, 5vw, 96px); display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; color: #e9eaf2; cursor: pointer; }
 .hero-video-toggle svg { width: 18px; height: 18px; fill: currentColor; }
-.hero-video-toggle:hover { background: rgba(41,45,107,.65); }
+.hero-video-toggle:hover { background: transparent; }
 @media (max-width: 600px) {
   .hero--video .hero-inner { padding-block: 100px clamp(100px, 14svh, 140px); transform: none; }
   .hero--video .hero-title { font-size: clamp(28px, 7.8vw, 36px); }
