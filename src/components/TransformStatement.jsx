@@ -28,6 +28,11 @@ const projects = [
     videoId: 'tNm-9G6WmVY',
     description: 'A Dynamis é uma empresa que oferece produtos de energia solar e sustentável.\n\nO desafio, aqui, foi dar voz à cultura da empresa por meio de um manifesto audiovisual.',
     credit: 'Texto: Tatyele Rivera'
+  },
+  {
+    title: 'Resumo dos trabalhos',
+    videoId: 's8uD25KHajE',
+    description: 'Uma seleção de imagens e momentos de diferentes produções, reunindo um pouco do meu olhar e dos trabalhos que realizei no audiovisual.'
   }
 ];
 
