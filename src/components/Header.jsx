@@ -40,7 +40,7 @@ export default function Header() {
         <a href="#hero" className="logo" aria-label="João Vitor Molleri | Videomaker — página inicial">
           <span className="brand-name">João Vitor Molleri <span className="brand-role">| Videomaker</span></span>
         </a>
-        <a href="#contato" className="header-contact-link" onClick={scrollToContact}>Fale conosco</a>
+        <a href="#contato" className="header-contact-link" onClick={scrollToContact}>Contato</a>
       </nav>
     </header>
   );
