@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import './HeroVideo.css';
 
 const heroTitleLines = ['Audiovisual que', 'comunica e encanta.'];
+const mobileVideoQuery = '(max-width: 600px)';
 
 export default function Hero() {
   const videoRef = useRef(null);
@@ -9,7 +10,19 @@ export default function Hero() {
 
   const [wantsPlayback, setWantsPlayback] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia(mobileVideoQuery).matches);
+  const videoSrc = `/assets/videos/hero-${isMobile ? 'portrait' : 'landscape'}.mp4`;
+  const videoPoster = `/assets/images/hero-${isMobile ? 'portrait' : 'landscape'}-poster.jpg`;
 
+  useEffect(() => {
+    const media = window.matchMedia(mobileVideoQuery);
+    const updateVideo = event => {
+      setIsMobile(event.matches);
+      setIsPlaying(false);
+    };
+    media.addEventListener('change', updateVideo);
+    return () => media.removeEventListener('change', updateVideo);
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -43,7 +56,7 @@ export default function Hero() {
       window.removeEventListener('pageshow', syncPlayback);
       video.pause();
     };
-  }, [wantsPlayback]);
+  }, [wantsPlayback, videoSrc]);
 
   const togglePlayback = () => {
     const video = videoRef.current;
@@ -60,8 +73,10 @@ export default function Hero() {
 
   return (
     <section className="hero hero--video" id="hero" data-section="hero" ref={heroRef} aria-label="Apresentação de trabalhos audiovisuais">
-      <div className="hero-background hero-video-background" aria-hidden="true">
+      <div className="hero-background hero-video-background" style={{ backgroundImage: `url("${videoPoster}")` }} aria-hidden="true">
         <video
+          key={videoSrc}
+          src={videoSrc}
           ref={videoRef}
           className="hero-background-video"
           autoPlay={wantsPlayback}
@@ -69,11 +84,10 @@ export default function Hero() {
           loop
           playsInline
           preload="auto"
-          poster="/assets/images/hero-broll-poster.jpg"
+          poster={videoPoster}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
         >
-          <source src="/assets/videos/hero-broll.mp4" type="video/mp4" />
         </video>
       </div>
       <div className="hero-inner">
