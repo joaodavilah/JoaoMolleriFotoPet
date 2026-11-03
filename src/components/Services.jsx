@@ -37,7 +37,7 @@ export default function Services() {
           <h2 className="section-title" id="services-title">Posso te ajudar com:</h2>
         </header>
         <div className="services-explorer studio-console">
-          <div className="studio-selector">
+          <div className="studio-selector" style={{ '--studio-selected-index': selectedIndex }}>
             <div className="services-wheel-shell">
               <OptionWheel items={services.map(item => item.title)} defaultSelected={0} onChange={setSelectedIndex}
                 textColor="#e9eaf2" activeColor="#c1d42f" fontSize={2} spacing={1.6}

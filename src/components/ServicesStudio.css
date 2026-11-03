@@ -35,3 +35,14 @@
 }
 .services--studio .services-option-wheel .option-wheel__item { font-size: 2rem; }
 @media (max-width: 900px) { .services--studio .services-option-wheel .option-wheel__item { font-size: clamp(1.55rem, 6vw, 1.8rem); } }
+@media (max-width: 600px) {
+  .services--studio .services-head { margin-bottom: 12px; }
+  .services--studio .services-wheel-shell,
+  .services--studio .services-option-wheel { height: 212px; }
+  .services--studio .services-option-wheel .option-wheel__item {
+    /* Keep all three options near the heading as the wheel selection changes.
+       51.2px matches the wheel's row spacing (2rem * 1.6). */
+    top: calc(52px + var(--studio-selected-index) * 51.2px);
+    transition: top 200ms ease-out, color 240ms ease, text-shadow 240ms ease;
+  }
+}
