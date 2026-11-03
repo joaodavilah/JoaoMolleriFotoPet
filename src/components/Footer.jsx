@@ -16,6 +16,7 @@ const navigation = [
   ['Sobre', '#sobre'],
   ['Serviços', '#servicos'],
   ['Portfólio', '#portfolio'],
+  ['Depoimentos', '#depoimentos'],
   ['Contato', '#contato']
 ];
 
