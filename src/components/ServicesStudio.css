@@ -11,7 +11,7 @@
 .services--studio .services-option-wheel { min-height: 0; height: 340px; }
 .services--studio .option-wheel__item--selected { text-shadow: none; }
 .studio-screen { min-width: 0; padding: 24px 30px 20px; border-radius: 20px; border: 1px solid rgba(233,234,242,.16); background: linear-gradient(135deg, rgba(233,234,242,.045), rgba(0,0,0,.12)); }
-.studio-screen-top { display: flex; justify-content: space-between; gap: 16px; font-size: .65rem; color: rgba(233,234,242,.6); text-transform: uppercase; letter-spacing: .1em; }
+.studio-screen-top { display: flex; justify-content: flex-end; gap: 16px; font-size: .65rem; color: rgba(233,234,242,.6); text-transform: uppercase; letter-spacing: .1em; }
 .studio-screen-top i { display: inline-block; width: 5px; height: 5px; margin-right: 7px; border-radius: 50%; background: #c1d42f; }
 .studio-feature { padding-top: 20px; min-height: 300px; }
 .studio-viewfinder { aspect-ratio: 4 / 3; height: auto; position: relative; margin-bottom: 24px; }

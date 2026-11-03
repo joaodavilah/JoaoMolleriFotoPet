@@ -46,7 +46,7 @@ export default function Services() {
             </div>
           </div>
           <div className="studio-screen" aria-live="polite" aria-atomic="true">
-            <div className="studio-screen-top"><span><i aria-hidden="true" /> Whale Filmes</span><span aria-hidden="true">0{selectedIndex + 1} / 03</span></div>
+            <div className="studio-screen-top"><span aria-hidden="true">0{selectedIndex + 1} / 03</span></div>
             <AnimatePresence mode="wait" initial={false}>
               <motion.div key={service.title} className="studio-feature"
                 initial={{ opacity: 0, y: reducedMotion ? 0 : 10 }} animate={{ opacity: 1, y: 0 }}
@@ -58,7 +58,6 @@ export default function Services() {
                 </div>
                 <h3>{service.stage}</h3>
                 <p>{service.description}</p>
-                <div className="studio-tags">{service.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
               </motion.div>
             </AnimatePresence>
             <div className="studio-timeline" aria-hidden="true">{services.map((item, index) => <span className={index === selectedIndex ? 'is-active' : ''} key={item.title} />)}</div>
